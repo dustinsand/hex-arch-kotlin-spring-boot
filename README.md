@@ -1,17 +1,17 @@
 # Hexagonal Architecture (aka Ports and Adapters)
 
-Personally I find hexagonal architecture to match how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM micro services to model off so I've created my own interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each author I've learned this architecture from.
+“Create your application to work without either a UI or a database so you can run automated regression-tests against the application, work when the database becomes unavailable, and link applications together without any user involvement.”  –Alistair Cockburn
 
-Feedback desired.   
+Personally I've used hexagonal architectures for years because it matches how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM micro services which other engineers are also familiar with so I've created my own interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
-Thank you to all the engineers who have shared their knowledge on this topic!  See references for what this derivative was based on.
+Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are not familiar with this architecture, please review the references first.
 
 # Project Description
 
-Does nothing useful except show an example JVM project structure for a micro service using a hexagonal architecture with Kotlin and Spring Boot. 
+Used to explain the project structure for a micro service using a hexagonal architecture with Kotlin and Spring Boot. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture. 
 
 # Flow
-The flow of control goes from the user into the Application Core, over to the infrastructure tools, back to the Application Core and finally back to the user.
+The flow of control goes from the entry port into the Application Core, over to the infrastructure tools, back to the Application Core and finally back to the user.
 
 # Package Structure
 ## core
