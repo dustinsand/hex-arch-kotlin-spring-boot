@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class FindPeopleImpl(val personGateway: PersonGateway?) : FindPeopleService {
+internal class FindPeopleImpl(val personGateway: PersonGateway?) : FindPeopleService {
     override fun find(request: FindPeopleService.Request): FindPeopleService.Response {
         val result = personGateway!!.findPeople(FindPeopleQuery(request.nameContains))
                 .map { it.toUseCaseResponseModel() }
@@ -15,6 +15,6 @@ class FindPeopleImpl(val personGateway: PersonGateway?) : FindPeopleService {
     }
 }
 
-fun Person.toUseCaseResponseModel(): FindPeopleService.Response.Person {
+internal fun Person.toUseCaseResponseModel(): FindPeopleService.Response.Person {
     return FindPeopleService.Response.Person(firstName)
 }

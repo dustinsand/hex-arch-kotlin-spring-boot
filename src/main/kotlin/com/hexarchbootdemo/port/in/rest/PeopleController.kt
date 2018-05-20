@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono
 
 
 @RestController
-class PeopleController {
+internal class PeopleController {
     @Autowired
     lateinit var findPeopleService: FindPeopleService
 

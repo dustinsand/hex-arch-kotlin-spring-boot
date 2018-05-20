@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class PersonMemoryGatewayImpl(private val productRepository: MemoryPersonRepository? = null) : PersonGateway {
+internal class PersonMemoryGatewayImpl(private val productRepository: MemoryPersonRepository? = null) : PersonGateway {
 
     override fun findPeople(query: FindPeopleQuery): List<Person> {
         return productRepository!!.findByNameContains(query.nameContains).map { it.toDomain() }

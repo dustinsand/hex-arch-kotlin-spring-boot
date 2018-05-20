@@ -5,13 +5,13 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-class MemoryPersonRepository {
+internal class MemoryPersonRepository {
     fun findByNameContains(nameContains: String?) : List<PersonMemory> {
         return listOf(PersonMemory("Dustin"))
     }
 }
 
-data class PersonMemory(val firstName: String) {
+internal data class PersonMemory(val firstName: String) {
     fun toDomain(): Person {
         return Person(firstName)
     }
