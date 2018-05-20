@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.port.infra.persistence.gateway
+package com.hexarchbootdemo.port.out.persistence.gateway
 
 import com.hexarchbootdemo.core.domain.entity.Person
 import org.springframework.stereotype.Repository

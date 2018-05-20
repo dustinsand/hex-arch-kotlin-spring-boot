@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.port.entry.rest
+package com.hexarchbootdemo.port.`in`.rest
 
 import com.hexarchbootdemo.core.application.FindPeopleService
 import org.springframework.beans.factory.annotation.Autowired

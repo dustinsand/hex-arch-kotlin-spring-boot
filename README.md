@@ -16,6 +16,8 @@ The flow of control goes from the entry port into the Application Core, over to 
 # Package Structure
 ## core
 ### application
+Orchestrates the work in the domain model and used by the ports.
+
 Example role of an Application Service to fulfill a use case:
 
 1. use a gateway to find one or several entities
@@ -42,9 +44,9 @@ The solution is to create a Domain Service, which has the role of receiving a se
 
 ## port
 A port is a consumer agnostic entry and exit point to/from the application.
-### entry (TODO, what is a better name?)
+### in (TODO, what is a better name?)
 The entry point and used it to tell the Application Core what to do. They translate whatever comes from a delivery mechanism into a method call in the Application Core.
-### infra
+### out (TODO, what is a better name?)
 The infrastructure tools that the application uses, for example, a database, a 3rd party APIs.  These ports are needed to support the use cases.
 
 It contains code that your application uses but it is not actually your application.  
@@ -58,3 +60,4 @@ It contains code that your application uses but it is not actually your applicat
 * https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html
 * https://dzone.com/articles/hexagonal-architecture-is-powerful
 * https://www.culttt.com/2014/12/31/hexagonal-architecture/
+* https://skillsmatter.com/skillscasts/5744-decoupling-from-asp-net-hexagonal-architectures-in-net
