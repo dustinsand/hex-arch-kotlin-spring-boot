@@ -1,8 +1,8 @@
-# Hexagonal Architecture (aka Ports and Adapters)
+# Hexagonal Architecture (aka Ports and Adapters) and DDD
 
 “Create your application to work without either a UI or a database so you can run automated regression-tests against the application, work when the database becomes unavailable, and link applications together without any user involvement.”  –Alistair Cockburn
 
-Personally I've used hexagonal architectures for years because it matches how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM micro services which other engineers are also familiar with so I've created my own interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
+Personally I've used hexagonal architectures with DDD for years because it matches how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM micro services which other engineers are also familiar with so I've created my own interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
 Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are not familiar with this architecture, please review the references first.
 
@@ -29,12 +29,11 @@ The objects in this layer contain the data and the logic to manipulate that data
 The business objects that represent something in the domain. Examples of these objects are, first of all, Entities but also Value Objects, Enums and any objects used in the Domain Model.
 
 The Domain Model is also where Domain Events “live”. These events are triggered when a specific set of data changes and they carry those changes with them. In other words, when an entity changes, a Domain Event is triggered and it carries the changed properties new values. These events are perfect, for example, to be used in Event Sourcing.
-#### entity
+#### model
 An object that is identified by its consistent thread of continuity, as opposed to traditional objects, which are defined by their attributes.
-#### gateway
-An object that encapsulates access to an external system or resource.
 
-Martin Fowler's definition from https://martinfowler.com/eaaCatalog/gateway.html
+Repository for the domain model that encapsulates access to an external system or resource.
+
 ### service
 Sometimes we encounter some domain logic that involves different entities, of the same type or not, and we feel that that domain logic does not belong in the entities themselves, we feel that that logic is not their direct responsibility.
 
@@ -44,9 +43,9 @@ The solution is to create a Domain Service, which has the role of receiving a se
 
 ## port
 A port is a consumer agnostic entry and exit point to/from the application.
-### in (TODO, what is a better name?)
+### in
 The entry point and used it to tell the Application Core what to do. They translate whatever comes from a delivery mechanism into a method call in the Application Core.
-### out (TODO, what is a better name?)
+### out
 The infrastructure tools that the application uses, for example, a database, a 3rd party APIs.  These ports are needed to support the use cases.
 
 It contains code that your application uses but it is not actually your application.  
