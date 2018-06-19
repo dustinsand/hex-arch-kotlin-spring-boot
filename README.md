@@ -4,12 +4,6 @@
 
 Personally I've used hexagonal architectures with DDD for years because it matches how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM micro services which other engineers are also familiar with so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
-Why am I a proponent of this?
-
-- Separation of concerns.  Separates technical complexities from the domain complexities to avoid the "big ball of mud".
-- Promotes coarse-grained use case services which hide the low level domain details. Clients of the application use these services to perform use cases preventing directly using the domain classes. 
--  
-
 Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are not familiar with this architecture, please review the references first.
 
 # Project Description
