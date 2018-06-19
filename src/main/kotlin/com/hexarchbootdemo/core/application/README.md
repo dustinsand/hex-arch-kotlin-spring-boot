@@ -1,0 +1,1 @@
+The application layer maps domain information to an application DTO in order to not expose domain details.

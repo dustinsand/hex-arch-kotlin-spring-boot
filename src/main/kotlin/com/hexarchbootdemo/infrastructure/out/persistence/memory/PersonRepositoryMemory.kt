@@ -1,9 +1,9 @@
-package com.hexarchbootdemo.port.out.persistence.memory
+package com.hexarchbootdemo.infrastructure.out.persistence.memory
 
+import com.hexarchbootdemo.core.application.FindByNameQuery
+import com.hexarchbootdemo.core.application.PersonRepository
 import com.hexarchbootdemo.core.domain.model.person.CreatePerson
-import com.hexarchbootdemo.core.domain.model.person.FindByNameQuery
 import com.hexarchbootdemo.core.domain.model.person.Person
-import com.hexarchbootdemo.core.domain.model.person.PersonRepository
 import org.springframework.stereotype.Repository
 
 

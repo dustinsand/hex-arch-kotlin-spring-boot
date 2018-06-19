@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.port.`in`.rest
+package com.hexarchbootdemo.infrastructure.`in`.rest
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
@@ -31,7 +31,9 @@ class PeopleControllerTestIT(@LocalServerPort val port: Int) {
                 .get("/people?name=dustin")
                 .then()
                 .statusCode(200)
-                .body("firstName", hasItems("Dustin"))
+                .body("firstInitial", hasItems("D"),
+                        "firstName", hasItems("Dustin")
+                )
     }
 }
 
