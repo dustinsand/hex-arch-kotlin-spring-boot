@@ -10,7 +10,7 @@ Thank you to all the engineers who have shared their knowledge on this topic.  T
 
 Used to explain the project structure for a micro service using a hexagonal architecture with Kotlin and Spring Boot. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture. 
 
-# Objective of these Architectures
+# Objective Of These Architectures
 
 * Independent of Frameworks. The architecture does not depend on the existence of some library of feature laden software. This allows you to use such frameworks as tools, rather than having to cram your system into their limited constraints.
 * Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
