@@ -17,13 +17,14 @@ Used to explain the project structure for a micro service using a hexagonal arch
 * Independent of UI. The UI can change easily, without changing the rest of the system. A Web UI could be replaced with a console UI, for example, without changing the business rules.
 * Independent of Database. You can swap out Oracle or SQL Server, for Mongo, BigTable, CouchDB, or something else. Your business rules are not bound to the database.
 * Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
+* Modular. Minimizes tangled dependencies by decoupling the business logic from the technical code. Reduces the friction of extracting core domain objects to another context. Sometimes it makes design sense to start as more of a monolith and extract later to another context when there are strong reasons to do so.
 
 # Flow
 Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers.
 
 # Package Structure
 ## core
-Isolated from technical complexities of clients, frameworks and infrastructure concerns. Dependencies face inward so it does not depend on any layers outside of it.
+Isolated from technical complexities of clients, frameworks and infrastructure concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Infrastructure can be changed without changes to the core.
 ### application layer
 The API representing the business use cases of the application. Dependent on the domain layer to orchestrate the business use cases and acts as a facade to the domain.  The domain model can continue to evolve without impacting clients. This layer is also responsible for coordinating notifications to other systems when significant events occur within the domain. 
 
@@ -55,11 +56,11 @@ So our first reaction might be to place that logic outside the entities, in an A
 The solution is to create a Domain Service, which has the role of receiving a set of entities and performing some business logic on them. A Domain Service belongs to the Domain Layer, and therefore it knows nothing about the classes in the Application Layer, like the Application Services or the Repositories. In the other hand, it can use other Domain Services and, of course, the Domain Model objects.
 
 ## infrastructure layer
-The infrastructure layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not dirctly affect the use case exposed and the domain logic of an application. 
+The infrastructure layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
 ### in
 The entry point (inbound) of clients to use the application layer. The inbound infrastructure translates whatever comes from a client into a method call in the application layer.
 ### out
-These are the outbound infrastructure technical details that the application uses, for example, a database, a 3rd party APIs.  These are needed to support the use cases.
+These are the outbound infrastructure technical details that the application uses, for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 # Communication Across Layers
 When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw unsolicited data or user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.
@@ -79,3 +80,5 @@ The application layer is more appropriate for integration testing and the domain
 * https://dzone.com/articles/hexagonal-architecture-is-powerful
 * https://www.culttt.com/2014/12/31/hexagonal-architecture/
 * https://skillsmatter.com/skillscasts/5744-decoupling-from-asp-net-hexagonal-architectures-in-net
+* https://beyondxscratch.com/2017/08/19/decoupling-your-technical-code-from-your-business-logic-with-the-hexagonal-architecture-hexarch/
+* https://softwarecampament.wordpress.com/portsadapters/
