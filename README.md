@@ -58,9 +58,9 @@ The solution is to create a Domain Service, which has the role of receiving a se
 ## infrastructure layer
 The infrastructure layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
 ### in
-The entry point (inbound) of clients to use the application layer. The inbound infrastructure translates whatever comes from a client into a method call in the application layer.
+The entry point (left side of diagram below in green) of clients to use the application layer. The inbound infrastructure translates whatever comes from a client into a method call in the application layer.
 ### out
-These are the outbound infrastructure technical details that the application uses, for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
+These are the outbound infrastructure technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 # Communication Across Layers
 When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw unsolicited data or user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.
