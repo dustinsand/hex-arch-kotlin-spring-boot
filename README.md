@@ -69,6 +69,13 @@ When communicating across layers, to prevent exposing the details of the domain 
 Separating the concerns in the application and ensuring the domain logic is not dependent on any technical details allows you to test domain and application logic in isolation independent of any infrastructure frameworks.
 
 The application layer is more appropriate for integration testing and the domain layer is more appropriate for unit testing with mocks.
+
+# TL;DR Show me a diagram
+
+[Herberto Graca](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) has a diagram I like showing all the components together.
+
+![herbertograca_hex_diagram](https://user-images.githubusercontent.com/5289/50517936-e70d2200-0a80-11e9-9382-d124912c27f3.png)
+
 # References
 * http://wiki.c2.com/?HexagonalArchitecture
 * http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html
