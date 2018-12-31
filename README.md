@@ -72,7 +72,7 @@ The application layer is more appropriate for integration testing and the domain
 
 # TL;DR Show me a diagram
 
-[Herberto Graca](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) has a diagram I like showing all the components together.
+The references have great example diagrams to visually explain how the components fit together so no point reinventing the wheel here.  [Herberto Graca](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) has a diagram which is one of my favorites showing all the components together.
 
 ![herbertograca_hex_diagram](https://user-images.githubusercontent.com/5289/50517936-e70d2200-0a80-11e9-9382-d124912c27f3.png)
 
