@@ -1,7 +1,7 @@
-package com.hexarchbootdemo.infrastructure.`in`.rest
+package com.hexarchbootdemo.infrastructure.ingress.rest
 
 import com.hexarchbootdemo.core.application.PeopleService
-import com.hexarchbootdemo.infrastructure.`in`.rest.data.PersonJson
+import com.hexarchbootdemo.infrastructure.ingress.rest.data.PersonJson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam

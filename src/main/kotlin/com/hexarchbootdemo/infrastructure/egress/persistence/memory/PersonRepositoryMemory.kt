@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.infrastructure.out.persistence.memory
+package com.hexarchbootdemo.infrastructure.egress.persistence.memory
 
 import com.hexarchbootdemo.core.application.FindByNameQuery
 import com.hexarchbootdemo.core.application.PersonRepository

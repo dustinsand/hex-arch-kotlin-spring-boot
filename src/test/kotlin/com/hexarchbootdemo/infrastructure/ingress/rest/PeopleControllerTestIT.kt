@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.infrastructure.`in`.rest
+package com.hexarchbootdemo.infrastructure.ingress.rest
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
