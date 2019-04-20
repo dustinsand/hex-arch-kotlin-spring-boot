@@ -2,15 +2,15 @@
 
 “Create your application to work without either a UI or a database so you can run automated regression-tests against the application, work when the database becomes unavailable, and link applications together without any user involvement.”  –Alistair Cockburn
 
-Personally I've used hexagonal architectures with DDD for years because it matches how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM micro services which other engineers are also familiar with so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
+Personally I've used hexagonal architectures with DDD for years because it aligns well with how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM microservices so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
-Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are not familiar with these architectures, please review the references first.
+Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are not familiar with this architecture, please review the references first.
 
 # Project Description
 
-Used to explain the project structure for a micro service using a hexagonal architecture with Kotlin and Spring Boot. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture. 
+Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture. 
 
-# Objective Of These Architectures
+# Objective Of This Architecture
 
 * Independent of Frameworks. The architecture does not depend on the existence of some library of feature laden software. This allows you to use such frameworks as tools, rather than having to cram your system into their limited constraints.
 * Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
@@ -44,9 +44,9 @@ The business objects that represent something in the domain. Examples of these o
 
 The Domain Model is also where Domain Events “live”. These events are triggered when a specific set of data changes and they carry those changes with them. In other words, when an entity changes, a Domain Event is triggered and it carries the changed properties new values. These events are perfect, for example, to be used in Event Sourcing.
 #### model
-An object that is identified by its consistent thread of continuity, as opposed to traditional objects, which are defined by their attributes.
+Using DDD this is where you define the Entities, Aggregates, Value Objects and Domain Events to model your domain. 
 
-Repository for the domain model that encapsulates access to an external system or resource.
+[Refer to the DDD tactical patterns for descriptions](http://dddsample.sourceforge.net/patterns-reference.html)
 
 ### service
 Sometimes we encounter some domain logic that involves different entities, of the same type or not, and we feel that that domain logic does not belong in the entities themselves, we feel that that logic is not their direct responsibility.
@@ -54,6 +54,13 @@ Sometimes we encounter some domain logic that involves different entities, of th
 So our first reaction might be to place that logic outside the entities, in an Application Service. However, this means that that domain logic will not be reusable in other use cases: domain logic should stay out of the application layer!
 
 The solution is to create a Domain Service, which has the role of receiving a set of entities and performing some business logic on them. A Domain Service belongs to the Domain Layer, and therefore it knows nothing about the classes in the Application Layer, like the Application Services or the Repositories. In the other hand, it can use other Domain Services and, of course, the Domain Model objects.
+
+Characterstics of a domain service are:
+* Domain services encapsulate domain logic and concepts that are not naturally modeled as value objects or entities in your model.
+* Domain services represent domain concepts; they are part of the ubiquitous language.
+* Domain services have no identity or state; their responsibility is to orchestrate business logic using entities and value objects.
+* Too many domain services can lead to an anemic domain model that does not align well with the problem domain.
+* Too few domain services can lead to logic being incorrectly located on entities or value objects. This causes distinct concepts to be mixed up, which reduces clarity.
 
 ## infrastructure layer
 The infrastructure layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
@@ -63,7 +70,7 @@ The entry point (left side of diagram below in green) of clients to use the appl
 These are the outbound infrastructure technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 # Communication Across Layers
-When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw unsolicited data or user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.
+When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw, unchecked user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.
 
 # Testing in Isolation
 Separating the concerns in the application and ensuring the domain logic is not dependent on any technical details allows you to test domain and application logic in isolation independent of any infrastructure frameworks.
@@ -78,6 +85,7 @@ The references have great example diagrams to visually explain how the component
 
 # References
 * http://wiki.c2.com/?HexagonalArchitecture
+* http://domainlanguage.com/ddd/
 * http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html
 * https://www.youtube.com/watch?v=0wAvVcrbVK4&t=1513s 
 * https://github.com/lievendoclo/devoxx-2017
