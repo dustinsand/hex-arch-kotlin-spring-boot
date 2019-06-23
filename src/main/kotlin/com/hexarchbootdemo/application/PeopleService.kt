@@ -1,6 +1,6 @@
-package com.hexarchbootdemo.core.application
+package com.hexarchbootdemo.application
 
-import com.hexarchbootdemo.core.domain.model.person.Person
+import com.hexarchbootdemo.domain.model.person.Person
 import org.springframework.stereotype.Service
 
 
@@ -11,7 +11,7 @@ interface PeopleService {
 }
 
 @Service
-class PeopleServiceImpl(val personRepository: PersonRepository) : PeopleService {
+class PeopleServiceImpl(val personRepository: PeopleRepository) : PeopleService {
     override fun findByName(name:String): List<PeopleService.PersonDto> {
         return personRepository.findPeople(FindByNameQuery(name)).map { it.toDto() }
     }

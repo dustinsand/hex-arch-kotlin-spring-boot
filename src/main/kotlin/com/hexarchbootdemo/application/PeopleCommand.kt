@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.core.domain.model.person
+package com.hexarchbootdemo.application
 
 
 interface CreatePerson {

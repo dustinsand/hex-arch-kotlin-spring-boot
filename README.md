@@ -23,27 +23,15 @@ Used to explain the project structure for a microservice using a hexagonal archi
 Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers.
 
 # Package Structure
-## core
-Isolated from technical complexities of clients, frameworks and infrastructure concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Infrastructure can be changed without changes to the core.
-### application layer
-The API representing the business use cases of the application. Dependent on the domain layer to orchestrate the business use cases and acts as a facade to the domain.  The domain model can continue to evolve without impacting clients. This layer is also responsible for coordinating notifications to other systems when significant events occur within the domain. 
+## domain
+Isolated from technical complexities of clients, frameworks and adapter(infrastructure) concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Adapters(Infrastructure) can be changed without changes to the domain.
 
-Clients must adapt to the input defined by the API and also transform the output from the API into their own format. The application layer then acts as an anti-corruption layer, ensuring the domain layer stays unaffected by external technical details.
-
-This layer defines repository interfaces implemented by the infrastructure so there is no coupling between domain layer and technical code.
-
-Example role of an Application Service to fulfill a use case:
-
-1. use a repository to find one or several entities
-2. tell those entities to do some domain logic
-3. and use the repository to persist the entities again
-### domain layer
 The objects in this layer contain the data and the logic pertaining to the business. Independent of the business processes that trigger that logic, they are independent and completely unaware of the Application Layer.
 
 The business objects that represent something in the domain. Examples of these objects are, first of all, Entities but also Value Objects, Enums and any objects used in the Domain Model.
 
 The Domain Model is also where Domain Events “live”. These events are triggered when a specific set of data changes and they carry those changes with them. In other words, when an entity changes, a Domain Event is triggered and it carries the changed properties new values. These events are perfect, for example, to be used in Event Sourcing.
-#### model
+### model
 Using DDD this is where you define the Entities, Aggregates, Value Objects and Domain Events to model your domain. 
 
 [Refer to the DDD tactical patterns for descriptions](http://dddsample.sourceforge.net/patterns-reference.html)
@@ -62,20 +50,37 @@ Characterstics of a domain service are:
 * Too many domain services can lead to an anemic domain model that does not align well with the problem domain.
 * Too few domain services can lead to logic being incorrectly located on entities or value objects. This causes distinct concepts to be mixed up, which reduces clarity.
 
-## infrastructure layer
-The infrastructure layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
-### ingress
-The entry point (left side of diagram below in green) of clients to use the application layer. The inbound infrastructure translates whatever comes from a client into a method call in the application layer.
-### egress
-These are the outbound infrastructure technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
+## application layer
+The API representing the business use cases of the application. Dependent on the domain layer to orchestrate the business use cases and acts as a facade to the domain.  The domain model can continue to evolve without impacting clients. This layer is also responsible for coordinating notifications to other systems when significant events occur within the domain. 
+
+Clients must adapt to the input defined by the API and also transform the output from the API into their own format. The application layer then acts as an anti-corruption layer, ensuring the domain layer stays unaffected by external technical details.
+
+This layer defines repository interfaces implemented by the adapters(infrastructure) so there is no coupling between domain layer and technical code.
+
+Example role of an Application Service to fulfill a use case:
+
+1. use a repository to find one or several entities
+2. tell those entities to do some domain logic
+3. and use the repository to persist the entities again
+
+## adapter layer
+The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
+### ingress (preferred 'in', but 'in' is a reserved word in Kotlin)
+The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
+### egress (preferred 'out', but 'out' is a reserved word in Kotlin)
+These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 # Communication Across Layers
 When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw, unchecked user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.
 
 # Testing in Isolation
-Separating the concerns in the application and ensuring the domain logic is not dependent on any technical details allows you to test domain and application logic in isolation independent of any infrastructure frameworks.
+Separating the concerns in the application and ensuring the domain logic is not dependent on any technical details allows you to test domain and application logic in isolation independent of any adapter frameworks.
 
 The application layer is more appropriate for integration testing and the domain layer is more appropriate for unit testing with mocks.
+
+# Enforcing the Architecture
+
+[ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing given Java bytecode, importing all classes into a Java code structure. ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See HexagonalArchitectureTest for the rules checked.  
 
 # TL;DR Show me a diagram
 

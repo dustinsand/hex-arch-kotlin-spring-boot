@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.infrastructure.egress.rpc
+package com.hexarchbootdemo.adapter.egress.rpc
 
 // Example of a REST Gateway
 

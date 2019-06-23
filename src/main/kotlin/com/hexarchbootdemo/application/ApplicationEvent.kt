@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.core.application
+package com.hexarchbootdemo.application
 
 
 class ApplicationEvent {
