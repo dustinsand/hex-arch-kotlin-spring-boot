@@ -80,7 +80,7 @@ The application layer is more appropriate for integration testing and the domain
 
 # Enforcing the Architecture
 
-[ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing given Java bytecode, importing all classes into a Java code structure. ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/.../HexagonalArchitectureTest.kt for the rules checked.  
+[ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing given Java bytecode, importing all classes into a Java code structure. ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/kotlin/.../HexagonalArchitectureTest.kt for the rules checked.  
 
 # TL;DR Show me a diagram
 
