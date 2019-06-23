@@ -1,6 +1,4 @@
 package com.hexarchbootdemo.application
 
 
-interface CreatePerson {
-    val firstName: String
-}
+data class CreatePerson(val firstName: String)
