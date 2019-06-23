@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dustinsand/hex-arch-kotlin-spring-boot.svg?branch=master)](https://travis-ci.org/dustinsand/hex-arch-kotlin-spring-boot) 
+
 # Hexagonal Architecture (aka Ports and Adapters) / Clean Architecture / DDD
 
 “Create your application to work without either a UI or a database so you can run automated regression-tests against the application, work when the database becomes unavailable, and link applications together without any user involvement.”  –Alistair Cockburn
