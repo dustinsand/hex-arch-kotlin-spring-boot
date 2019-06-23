@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono.just
 
 
 @RestController
-class VotersController {
+private class VotersController {
     @Autowired
     lateinit var findVotersUseCase: FindVotersUseCase
 

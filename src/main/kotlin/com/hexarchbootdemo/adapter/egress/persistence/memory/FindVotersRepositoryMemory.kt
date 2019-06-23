@@ -6,7 +6,7 @@ import com.hexarchbootdemo.domain.model.Voter
 import org.springframework.stereotype.Repository
 
 @Repository
-class FindVotersRepositoryMemory : FindVoterPort {
+private class FindVotersRepositoryMemory : FindVoterPort {
 
     override fun findVoters(query: FindByNameQuery): List<Voter> {
         return listOf(Voter(firstName = "Dustin", lastName = "Shimono"))
