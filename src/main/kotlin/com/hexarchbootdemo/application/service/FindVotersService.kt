@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class FindVotersService(val findVoterRepository: FindVoterPort) : FindVotersUseCase {
-    override fun findByName(name: String): List<VoterDto> {
-        return findVoterRepository.findVoters(FindByNameQuery(name)).map { it.toDto() }
+    override fun findByName(command: FindByNameQuery): List<VoterDto> {
+        return findVoterRepository.findVoters(command).map { it.toDto() }
     }
 }
 
