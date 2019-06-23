@@ -1,6 +1,0 @@
-package com.hexarchbootdemo.application
-
-
-class ApplicationEvent {
-    data class PersonCreated(val person: PeopleService.PersonDto)
-}

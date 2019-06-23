@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PeopleControllerTestIT(@LocalServerPort val port: Int) {
+class VoterControllerTestIT(@LocalServerPort val port: Int) {
 
     val requestSpec: RequestSpecification = RequestSpecBuilder()
             .setBaseUri("http://localhost:$port")
@@ -24,15 +24,15 @@ class PeopleControllerTestIT(@LocalServerPort val port: Int) {
             .build()
 
     @Test
-    fun `Verify Person first name is present in response`() {
+    fun `Verify Voter first name is present in response`() {
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
-                .get("/people?name=dustin")
+                .get("/voters?name=shimono")
                 .then()
                 .statusCode(200)
                 .body("firstInitial", hasItems("D"),
-                        "firstName", hasItems("Dustin")
+                        "lastName", hasItems("Shimono")
                 )
     }
 }
