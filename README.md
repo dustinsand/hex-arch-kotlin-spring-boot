@@ -104,3 +104,5 @@ The references have great example diagrams to visually explain how the component
 * https://skillsmatter.com/skillscasts/5744-decoupling-from-asp-net-hexagonal-architectures-in-net
 * https://beyondxscratch.com/2017/08/19/decoupling-your-technical-code-from-your-business-logic-with-the-hexagonal-architecture-hexarch/
 * https://softwarecampament.wordpress.com/portsadapters/
+* https://www.youtube.com/watch?v=cPH5AiqLQTo
+* https://leanpub.com/get-your-hands-dirty-on-clean-architecture
