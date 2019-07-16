@@ -1,7 +1,7 @@
 package com.hexarchbootdemo.application.service
 
 
-interface RegisterVotersService {
+interface RegisterVoterService {
     fun registerPerson(firstName: String, lastName: String)
 }
 

@@ -45,7 +45,7 @@ So our first reaction might be to place that logic outside the entities, in an A
 
 The solution is to create a Domain Service, which has the role of receiving a set of entities and performing some business logic on them. A Domain Service belongs to the Domain Layer, and therefore it knows nothing about the classes in the Application Layer, like the Application Services or the Repositories. In the other hand, it can use other Domain Services and, of course, the Domain Model objects.
 
-Characterstics of a domain service are:
+Characteristics of a domain service are:
 * Domain services encapsulate domain logic and concepts that are not naturally modeled as value objects or entities in your model.
 * Domain services represent domain concepts; they are part of the ubiquitous language.
 * Domain services have no identity or state; their responsibility is to orchestrate business logic using entities and value objects.
@@ -53,11 +53,19 @@ Characterstics of a domain service are:
 * Too few domain services can lead to logic being incorrectly located on entities or value objects. This causes distinct concepts to be mixed up, which reduces clarity.
 
 ## application layer
+
+### port
+
+#### egress
+This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
+
+#### ingress
+This layer defines use case interfaces of the application.
+
+### service
 The API representing the business use cases of the application. Dependent on the domain layer to orchestrate the business use cases and acts as a facade to the domain.  The domain model can continue to evolve without impacting clients. This layer is also responsible for coordinating notifications to other systems when significant events occur within the domain. 
 
 Clients must adapt to the input defined by the API and also transform the output from the API into their own format. The application layer then acts as an anti-corruption layer, ensuring the domain layer stays unaffected by external technical details.
-
-This layer defines repository interfaces implemented by the adapters(infrastructure) so there is no coupling between domain layer and technical code.
 
 Example role of an Application Service to fulfill a use case:
 
@@ -67,9 +75,11 @@ Example role of an Application Service to fulfill a use case:
 
 ## adapter layer
 The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
-### ingress (preferred 'in', but 'in' is a reserved word in Kotlin)
+
+### ingress (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
 The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
-### egress (preferred 'out', but 'out' is a reserved word in Kotlin)
+
+### egress (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 # Communication Across Layers
@@ -82,7 +92,7 @@ The application layer is more appropriate for integration testing and the domain
 
 # Enforcing the Architecture
 
-[ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing given Java bytecode, importing all classes into a Java code structure. ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/kotlin/.../HexagonalArchitectureTest.kt for the rules checked.  
+The architecture is at risk of eroding over time if boundaries between layers are not maintained. [ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing the  given Java bytecode, importing all classes into a Java code structure. ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/kotlin/.../HexagonalArchitectureTest.kt for the rules checked.  
 
 # TL;DR Show me a diagram
 

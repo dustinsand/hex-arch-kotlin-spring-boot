@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner
 class HexArchBootDemoApplicationTests {
 
 	@Test
-	fun contextLoads() {
+    fun `Verify context loads`() {
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.hexarchbootdemo.application.port.ingress
 
 
-interface RegisterVotersUseCase {
+interface RegisterVoterUseCase {
 
     fun registerVoter(registerVoterCommand: RegisterVoterCommand)
 
