@@ -1,11 +1,13 @@
-package com.hexarchbootdemo.adapter.ingress.rest
+package com.hexarchbootdemo.adapter.input.rest
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
 import io.restassured.filter.log.RequestLoggingFilter
 import io.restassured.filter.log.ResponseLoggingFilter
+import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
 import org.hamcrest.CoreMatchers.hasItems
+import org.hamcrest.CoreMatchers.startsWith
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -28,11 +30,39 @@ class VoterControllerTestIT(@LocalServerPort val port: Int) {
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
-                .get("/voters?name=shimono")
+                .get("/voters?lastName=shimono")
                 .then()
                 .statusCode(200)
                 .body("firstInitial", hasItems("D"),
                         "lastName", hasItems("Shimono")
+
+                )
+    }
+
+    @Test
+    fun `Verify Voter is saved`() {
+        RestAssured.given()
+                .spec(requestSpec)
+                .given()
+                .contentType(ContentType.JSON)
+                .body("""
+                    { "firstName": "John", "lastName": "Doe" }
+                    """)
+                .`when`()
+                .post("/voters")
+                .then()
+                .statusCode(201)
+                .header("Location", startsWith("/voters/"))
+
+        RestAssured.given()
+                .spec(requestSpec)
+                .`when`()
+                .get("/voters?lastName=doe")
+                .then()
+                .statusCode(200)
+                .body("firstInitial", hasItems("J"),
+                        "lastName", hasItems("Doe")
+
                 )
     }
 }

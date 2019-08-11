@@ -1,8 +1,15 @@
 package com.hexarchbootdemo.application.service
 
+import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
+import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
+import org.springframework.stereotype.Service
+import java.util.UUID
 
-interface RegisterVoterService {
-    fun registerPerson(firstName: String, lastName: String)
+
+@Service
+class RegisterVoterService(val registerVoterRepository: RegisterVoterPort) : RegisterVoterUseCase {
+
+    override fun registerVoter(registerVoterCommand: RegisterVoterUseCase.RegisterVoterCommand): UUID {
+        return registerVoterRepository.save(registerVoterCommand)
+    }
 }
-
-// TODO create ficticious implementation

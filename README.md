@@ -56,10 +56,10 @@ Characteristics of a domain service are:
 
 ### port
 
-#### egress
+#### output
 This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
 
-#### ingress
+#### input
 This layer defines use case interfaces of the application.
 
 ### service
@@ -76,10 +76,10 @@ Example role of an Application Service to fulfill a use case:
 ## adapter layer
 The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
 
-### ingress (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
+### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
 The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
 
-### egress (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
+### output (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 # Communication Across Layers
