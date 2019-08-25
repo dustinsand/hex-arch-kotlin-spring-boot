@@ -5,8 +5,10 @@ import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNam
 import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.domain.model.Voter
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class FindVotersService(val findVoterRepository: FindVoterPort) : FindVoterUseCase {
     override fun findByLastName(command: FindByLastNameQuery): List<Voter> {
         return findVoterRepository.findVotersByLastName(command)
