@@ -10,7 +10,7 @@ Thank you to all the engineers who have shared their knowledge on this topic.  T
 
 # Project Description
 
-Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture. 
+Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot.  The architecture encourages a separation of concerns through layers of responsibility. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture.  
 
 # Objective Of This Architecture
 
@@ -21,8 +21,12 @@ Used to explain the project structure for a microservice using a hexagonal archi
 * Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
 * Modular. Minimizes tangled dependencies by decoupling the business logic from the technical code. Reduces the friction of extracting core domain objects to another context. Sometimes it makes design sense to start as more of a monolith and extract later to another context when there are strong reasons to do so.
 
-# Flow
-Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers.
+# How it works
+Inputs and outputs are at the outermost layer of the hexagon, the edge of the application.  The domain layer of the hexagon, the core, is insulated from the concerns at the edge of the application.  The inputs and outputs at the edge allow the design to be switched with other technologies without impacting the core of the application. 
+
+Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers. Outside of the application layer, we have ports (Interfaces) and adapters (Implementations) that handle messages from the outside world and map them to the appropriate application services handled in the domain layer. The resulting message from the application services are then passed back through the adapter as an appropriate response. 
+
+![voter_hex_diagram](https://user-images.githubusercontent.com/5289/63655608-29921600-c758-11e9-8fb0-94b934edcdf8.png)
 
 # Package Structure
 ## domain
@@ -56,11 +60,11 @@ Characteristics of a domain service are:
 
 ### port
 
-#### output
-This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
-
 #### input
 This layer defines use case interfaces of the application.
+
+#### output
+This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
 
 ### service
 The API representing the business use cases of the application. Dependent on the domain layer to orchestrate the business use cases and acts as a facade to the domain.  The domain model can continue to evolve without impacting clients. This layer is also responsible for coordinating notifications to other systems when significant events occur within the domain. 
