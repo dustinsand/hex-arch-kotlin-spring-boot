@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class VoterControllerTestIT(@LocalServerPort val port: Int) {
+class VoterControllerIT(@LocalServerPort val port: Int) {
 
     val requestSpec: RequestSpecification = RequestSpecBuilder()
             .setBaseUri("http://localhost:$port")
