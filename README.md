@@ -10,16 +10,19 @@ Thank you to all the engineers who have shared their knowledge on this topic.  T
 
 # Project Description
 
-Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot.  The architecture encourages a separation of concerns through layers of responsibility. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture.  
+Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot.  The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture.  
 
 # Objective Of This Architecture
 
+* Maintainable. Consistently structured software which is easy to understand, navigate and reason about.
+* Encourage a separation of concerns through layers of responsibility.
+* Evolutionary design. Easy to change, loosely coupled.
 * Independent of Frameworks. The architecture does not depend on the existence of some library of feature laden software. This allows you to use such frameworks as tools, rather than having to cram your system into their limited constraints.
-* Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
 * Independent of UI. The UI can change easily, without changing the rest of the system. A Web UI could be replaced with a console UI, for example, without changing the business rules.
 * Independent of Database. You can swap out Oracle or SQL Server, for Mongo, BigTable, CouchDB, or something else. Your business rules are not bound to the database.
 * Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
 * Modular. Minimizes tangled dependencies by decoupling the business logic from the technical code. Reduces the friction of extracting core domain objects to another context. Sometimes it makes design sense to start as more of a monolith and extract later to another context when there are strong reasons to do so.
+* Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
 
 # How it works
 Inputs and outputs are at the outermost layer of the hexagon, the edge of the application.  The domain layer of the hexagon, the core, is insulated from the concerns at the edge of the application.  The inputs and outputs at the edge allow the design to be switched with other technologies without impacting the core of the application. 
