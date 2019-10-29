@@ -6,7 +6,7 @@
 
 Personally I've used hexagonal architectures with DDD for years because it aligns well with how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM microservices so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
-Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are not familiar with this architecture, please review the references first.
+Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are unfamiliar with this architecture, please review the references first.
 
 # Project Description
 
@@ -33,7 +33,7 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 
 # Package Structure
 ## domain
-Isolated from technical complexities of clients, frameworks and adapter(infrastructure) concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Adapters(Infrastructure) can be changed without changes to the domain.
+Isolated from technical complexities of clients, frameworks and adapter (infrastructure) concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Adapters (Infrastructure) can be changed without changes to the domain.
 
 The objects in this layer contain the data and the logic pertaining to the business. Independent of the business processes that trigger that logic, they are independent and completely unaware of the Application Layer.
 
