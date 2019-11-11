@@ -6,7 +6,7 @@
 
 Personally I've used hexagonal architectures with DDD for years because it aligns well with how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM microservices so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
-Thank you to all the engineers who have shared their knowledge on this topic.  This project is a derivative of their work mentioned in the references. If you are unfamiliar with this architecture, please review the references first.
+Thank you to all the engineers who have shared their knowledge on this topic.  If you are unfamiliar with this architecture, please review the references first.  This project is my interpretation of how to design and implement a hexagonal architecture for the JVM.
 
 # Project Description
 
@@ -14,6 +14,7 @@ Used to explain the project structure for a microservice using a hexagonal archi
 
 # Objective Of This Architecture
 
+* Platform Agnostic. Architecture can be used for applications developed for modern programming platforms such as the JVM, Go, .Net, Python, Node, etc.  
 * Maintainable. Consistently structured software which is easy to understand, navigate and reason about.
 * Encourage a separation of concerns through layers of responsibility.
 * Evolutionary design. Easy to change, loosely coupled.
