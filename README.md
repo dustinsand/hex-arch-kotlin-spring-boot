@@ -14,11 +14,11 @@ Used to explain the project structure for a microservice using a hexagonal archi
 
 # Objective Of This Architecture
 
-* Platform Agnostic. Architecture can be used for applications developed for modern programming platforms such as the JVM, Go, .Net, Python, Node, etc.  
 * Maintainable. Consistently structured software which is easy to understand, navigate and reason about.
 * Encourage a separation of concerns through layers of responsibility.
 * Evolutionary design. Easy to change, loosely coupled.
-* Independent of Frameworks. The architecture does not depend on the existence of some library of feature laden software. This allows you to use such frameworks as tools, rather than having to cram your system into their limited constraints.
+* Platform Agnostic. Architecture can be used for applications developed for modern programming platforms such as the JVM, Go, .Net, Python, etc.  
+* Independent of Frameworks. The architecture does not depend on a framework, freeing developers to use their frameworks of choice.
 * Independent of UI. The UI can change easily, without changing the rest of the system. A Web UI could be replaced with a console UI, for example, without changing the business rules.
 * Independent of Database. You can swap out Oracle or SQL Server, for Mongo, BigTable, CouchDB, or something else. Your business rules are not bound to the database.
 * Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
@@ -26,9 +26,11 @@ Used to explain the project structure for a microservice using a hexagonal archi
 * Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
 
 # How it works
-Inputs and outputs are at the outermost layer of the hexagon, the edge of the application.  The domain layer of the hexagon, the core, is insulated from the concerns at the edge of the application.  The inputs and outputs at the edge allow the design to be switched with other technologies without impacting the core of the application. 
+The hexagon is divided into an inside and outside. The inside contains use cases (application services) and domain logic while the outside contains technical details like databases, messaging, caching.  The two parts are connected using "ports", exposed by the inside, and "adapters", implemented by the outside.
 
-Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers. Outside of the application layer, we have ports (Interfaces) and adapters (Implementations) that handle messages from the outside world and map them to the appropriate application services handled in the domain layer. The resulting message from the application services are then passed back through the adapter as an appropriate response. 
+Input and output "adapters" are at the outermost layer of the hexagon, the edge of the application.  The domain layer of the hexagon, the core, is insulated from the technical concerns at the edge of the application.  The inputs and outputs at the edge allow the design to be switched with other technologies without impacting the core of the application. 
+
+Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers. Outside of the application layer, we have ports (Interfaces) and adapters (Implementations) that handle the technical delivery to the outside world.  The adapters handle the technical delivery by using the application services in the domain layer. 
 
 ![voter_hex_diagram](https://user-images.githubusercontent.com/5289/63655608-29921600-c758-11e9-8fb0-94b934edcdf8.png)
 
@@ -65,7 +67,7 @@ Characteristics of a domain service are:
 ### port
 
 #### input
-This layer defines use case interfaces of the application.
+This layer defines use case (application behavior) interfaces of the application.
 
 #### output
 This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
