@@ -1,8 +1,8 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 
 val javaVersion = JavaVersion.VERSION_1_8
 val kotlinVersion: String by project
@@ -22,13 +22,6 @@ plugins {
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
     id("org.springframework.boot") version "2.2.3.RELEASE"
     id("com.github.ben-manes.versions") version "0.27.0"
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "$javaVersion"
-    }
 }
 
 java {
@@ -65,6 +58,22 @@ tasks.withType<Test> {
         showStandardStreams = true
         events(PASSED, SKIPPED, FAILED)
     }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = "$javaVersion"
+    }
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    // optional parameters
+    checkForGradleUpdate = true
+    outputFormatter = "json"
+    outputDir = "build/dependencyUpdates"
+    revision = "release"
+    reportfileName = "report"
 }
 
 dependencies {
