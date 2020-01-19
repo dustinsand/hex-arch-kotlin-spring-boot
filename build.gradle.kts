@@ -88,6 +88,11 @@ dependencies {
     }
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
+    testImplementation("io.rest-assured:json-path:$restAssuredVersion")
+    testImplementation("io.rest-assured:xml-path:$restAssuredVersion")
+    testImplementation("io.rest-assured:json-schema-validator:$restAssuredVersion")
+    testImplementation("io.rest-assured:spring-mock-mvc:$restAssuredVersion")
+    testImplementation("io.rest-assured:kotlin-extensions:$restAssuredVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
