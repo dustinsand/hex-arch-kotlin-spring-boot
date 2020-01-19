@@ -7,9 +7,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val javaVersion = JavaVersion.VERSION_1_8
 val kotlinVersion: String by project
 val junitJupiterVersion: String by project
+val restAssuredVersion: String by project
+val junitPlatformRunnerVersion: String by project
+val assertjVersion: String by project
+val archunitVersion: String by project
 extra["kotlin.version"] = kotlinVersion
 extra["junit-jupiter.version"] = junitJupiterVersion
-
 
 plugins {
     idea
@@ -64,8 +67,6 @@ tasks.withType<Test> {
     }
 }
 
-defaultTasks("build")
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -77,12 +78,12 @@ dependencies {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
     testImplementation("io.projectreactor:reactor-test")
-    testImplementation("io.rest-assured:rest-assured:3.3.0")
+    testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
-    testImplementation("org.junit.platform:junit-platform-runner:1.5.2")
-    testImplementation("org.assertj:assertj-core:3.11.1")
-    testImplementation("com.tngtech.archunit:archunit-junit5-api:0.13.0")
-    testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:0.13.0")
+    testImplementation("org.junit.platform:junit-platform-runner:$junitPlatformRunnerVersion")
+    testImplementation("org.assertj:assertj-core:$assertjVersion")
+    testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
+    testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:$archunitVersion")
 }
