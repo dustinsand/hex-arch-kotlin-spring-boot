@@ -2,7 +2,7 @@ package com.hexarchbootdemo.adapter.output.persistence
 
 import com.hexarchbootdemo.domain.model.Voter
 import org.springframework.stereotype.Repository
-import java.util.UUID
+import java.util.*
 
 /**
  * An actual database was not used intentionally to minimize the complexity of this project so concepts of architecture were clearer.

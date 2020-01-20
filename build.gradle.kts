@@ -1,26 +1,7 @@
+
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
-import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
-import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-plugins {
-    base
-    idea
-    java
-    kotlin("jvm") version "1.3.61"
-    kotlin("plugin.spring") version "1.3.61"
-    id("io.spring.dependency-management") version "1.0.8.RELEASE"
-    id("org.springframework.boot") version "2.2.3.RELEASE"
-    id("com.github.ben-manes.versions") version "0.27.0"
-}
-
-allprojects {
-
-    group = "com.dustinsand"
-    version = "1.0-SNAPSHOT"
-
+buildscript {
     repositories {
         mavenCentral()
         maven(url = "https://repo.spring.io/snapshot")
@@ -28,35 +9,26 @@ allprojects {
     }
 }
 
-subprojects {
+plugins {
+    val kotlinVersion = "1.3.61"
 
-    val javaVersion = JavaVersion.VERSION_1_8
+    id("io.spring.dependency-management") version "1.0.9.RELEASE"
+    id("org.springframework.boot") version "2.2.3.RELEASE"
+    id("com.github.ben-manes.versions") version "0.27.0"
+    kotlin("jvm") version kotlinVersion apply false
+    kotlin("plugin.spring") version kotlinVersion apply false
+}
 
-    apply(plugin = "java")
-    apply(plugin = "kotlin")
-    apply(plugin = "idea")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "io.spring.dependency-management")
-    the<DependencyManagementExtension>().apply {
-        imports {
-            val springBootVersion: String by project
-            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
-        }
-    }
+allprojects {
 
-    java {
+    val javaVersion = "1.8"
+
+    group = "com.dustinsand"
+    version = "1.0-SNAPSHOT"
+
+    tasks.withType<JavaCompile> {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
-    }
-
-    sourceSets {
-        main {
-            java.srcDir("src/main/kotlin")
-        }
-        test {
-            java.srcDir("src/test/kotlin")
-        }
     }
 
     tasks.withType<Test> {
@@ -64,14 +36,14 @@ subprojects {
         testLogging {
             showExceptions = true
             showStandardStreams = true
-            events(PASSED, SKIPPED, FAILED)
+            events(org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED, org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED, org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
         }
     }
 
-    tasks.withType<KotlinCompile>().configureEach {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
             freeCompilerArgs += "-Xjsr305=strict"
-            jvmTarget = "$javaVersion"
+            jvmTarget = javaVersion
         }
     }
 
@@ -82,5 +54,23 @@ subprojects {
         outputDir = "build/dependencyUpdates"
         revision = "release"
         reportfileName = "report"
+    }
+}
+
+subprojects {
+
+    //    apply(plugin = "kotlin")
+//    apply(plugin = "org.springframework.boot")
+//    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "io.spring.dependency-management")
+//    the<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension>().apply {
+//        imports {
+//            val springBootVersion: String by project
+//            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+//        }
+//    }
+
+    repositories {
+        mavenCentral()
     }
 }

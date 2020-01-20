@@ -1,7 +1,10 @@
-description = "api"
+description = "demo-application"
 
 plugins {
+    //    id("org.springframework.boot")
+
     kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 val junitJupiterVersion: String by project
@@ -11,16 +14,16 @@ val assertjVersion: String by project
 val archunitVersion: String by project
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-jooq")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.springframework.boot:spring-boot-starter-jooq:2.2.3.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-webflux:2.2.3.RELEASE")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    runtimeOnly("com.h2database:h2")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+    testImplementation(project(":demo-main"))
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.2.3.RELEASE") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
-    testImplementation("io.projectreactor:reactor-test")
+    testImplementation("io.projectreactor:reactor-test:3.3.2.RELEASE")
     testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
     testImplementation("io.rest-assured:json-path:$restAssuredVersion")
     testImplementation("io.rest-assured:xml-path:$restAssuredVersion")
