@@ -7,7 +7,7 @@ import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.Voter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
-import java.util.UUID
+import java.util.*
 
 @Repository
 class VoterPersistenceAdapter : FindVoterPort, RegisterVoterPort {

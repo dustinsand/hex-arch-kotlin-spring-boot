@@ -15,3 +15,4 @@ pluginManagement {
 }
 
 rootProject.name = "hex-arch-boot-demo"
+include("api")

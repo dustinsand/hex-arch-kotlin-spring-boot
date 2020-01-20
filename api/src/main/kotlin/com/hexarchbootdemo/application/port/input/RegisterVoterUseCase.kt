@@ -1,6 +1,6 @@
 package com.hexarchbootdemo.application.port.input
 
-import java.util.UUID
+import java.util.*
 
 
 interface RegisterVoterUseCase {
