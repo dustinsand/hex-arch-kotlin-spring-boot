@@ -61,7 +61,6 @@ allprojects {
 }
 
 subprojects {
-    val archunitVersion: String by project
     val assertjVersion: String by project
     val h2Version: String by project
     val junitJupiterVersion: String by project
@@ -99,8 +98,6 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
         testImplementation("org.junit.platform:junit-platform-runner:$junitPlatformRunnerVersion")
         testImplementation("org.assertj:assertj-core:$assertjVersion")
-        testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
-        testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:$archunitVersion")
         implementation("com.h2database:h2:$h2Version")
     }
 }
