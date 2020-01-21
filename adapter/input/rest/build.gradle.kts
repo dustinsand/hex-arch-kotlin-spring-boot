@@ -1,8 +1,6 @@
 description = "adapter-input-rest"
 
 plugins {
-    //    id("org.springframework.boot")
-
     kotlin("jvm")
     kotlin("plugin.spring")
 }
@@ -17,7 +15,6 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
-//    implementation("org.springframework.boot:spring-boot-starter-web:2.2.3.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-webflux:2.2.3.RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.2.3.RELEASE") {

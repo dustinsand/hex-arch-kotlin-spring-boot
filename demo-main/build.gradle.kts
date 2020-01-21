@@ -6,11 +6,6 @@ plugins {
     id("org.springframework.boot")
 }
 
-val junitJupiterVersion: String by project
-val restAssuredVersion: String by project
-val junitPlatformRunnerVersion: String by project
-val assertjVersion: String by project
-
 dependencies {
     implementation(project(":demo-application"))
     implementation(project(":adapter:input:rest"))
