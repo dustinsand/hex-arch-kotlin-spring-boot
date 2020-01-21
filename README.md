@@ -34,6 +34,11 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 
 ![voter_hex_diagram](https://user-images.githubusercontent.com/5289/63655608-29921600-c758-11e9-8fb0-94b934edcdf8.png)
 
+# !!!1/20/20 TODO!!! - Update README with details about how the Gradle multi-project structure works.
+Refactored build to use Gradle's Multi-Project to modularize application by layers of responsibility.
+Run all the tests: `./gradlew clean test`
+Run the application: `./gradlew clean :demo-main:bootRun`
+
 # Package Structure
 ## domain
 Isolated from technical complexities of clients, frameworks and adapter (infrastructure) concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Adapters (Infrastructure) can be changed without changes to the domain.
