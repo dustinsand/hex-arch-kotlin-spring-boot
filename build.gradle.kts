@@ -12,9 +12,9 @@ buildscript {
 
 plugins {
     val kotlinVersion = "1.3.61"
+
     base
     java
-
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("org.springframework.boot") version "2.2.3.RELEASE"
     id("com.github.ben-manes.versions") version "0.27.0"

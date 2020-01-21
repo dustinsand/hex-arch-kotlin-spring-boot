@@ -1,4 +1,4 @@
-description = "adapter-input-rest"
+description = "adapter-output-rpc"
 
 plugins {
     kotlin("jvm")
@@ -7,5 +7,4 @@ plugins {
 
 dependencies {
     implementation(project(":demo-application"))
-    testImplementation(project(":adapter:output:persistence"))
 }

@@ -9,4 +9,5 @@ plugins {
 dependencies {
     implementation(project(":demo-application"))
     implementation(project(":adapter:input:rest"))
+    implementation(project(":adapter:output:persistence"))
 }
