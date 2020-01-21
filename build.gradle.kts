@@ -1,5 +1,6 @@
 
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
@@ -11,6 +12,8 @@ buildscript {
 
 plugins {
     val kotlinVersion = "1.3.61"
+    base
+    java
 
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("org.springframework.boot") version "2.2.3.RELEASE"
@@ -40,7 +43,7 @@ allprojects {
         }
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             freeCompilerArgs += "-Xjsr305=strict"
             jvmTarget = javaVersion
@@ -58,19 +61,46 @@ allprojects {
 }
 
 subprojects {
+    val archunitVersion: String by project
+    val assertjVersion: String by project
+    val h2Version: String by project
+    val junitJupiterVersion: String by project
+    val projectReactorVersion: String by project
+    val restAssuredVersion: String by project
+    val junitPlatformRunnerVersion: String by project
+    val jacksonModuleKotlin: String by project
+    val springBootVersion: String by project
 
-    //    apply(plugin = "kotlin")
-//    apply(plugin = "org.springframework.boot")
-//    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
-//    the<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension>().apply {
-//        imports {
-//            val springBootVersion: String by project
-//            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
-//        }
-//    }
 
     repositories {
         mavenCentral()
+    }
+
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
+        implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+        }
+        testImplementation("io.projectreactor:reactor-test:$projectReactorVersion")
+        testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
+        testImplementation("io.rest-assured:json-path:$restAssuredVersion")
+        testImplementation("io.rest-assured:xml-path:$restAssuredVersion")
+        testImplementation("io.rest-assured:json-schema-validator:$restAssuredVersion")
+        testImplementation("io.rest-assured:spring-mock-mvc:$restAssuredVersion")
+        testImplementation("io.rest-assured:kotlin-extensions:$restAssuredVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
+        testImplementation("org.junit.platform:junit-platform-runner:$junitPlatformRunnerVersion")
+        testImplementation("org.assertj:assertj-core:$assertjVersion")
+        testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
+        testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:$archunitVersion")
+        implementation("com.h2database:h2:$h2Version")
     }
 }
