@@ -34,7 +34,7 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 
 ![voter_hex_diagram](https://user-images.githubusercontent.com/5289/63655608-29921600-c758-11e9-8fb0-94b934edcdf8.png)
 
-# !!!1/20/20 TODO!!! - Update README with details about how the Gradle multi-project structure works.
+# !!!1/20/20 TODO!!! - Update the 'Package Structure' below with details about how the Gradle multi-project structure works.
 Refactored build to use Gradle's Multi-Project to modularize application by layers of responsibility.
 Run all the tests: `./gradlew clean test`
 Run the application: `./gradlew clean :demo-main:bootRun`
