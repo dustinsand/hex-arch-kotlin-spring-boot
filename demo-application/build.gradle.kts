@@ -6,5 +6,5 @@ plugins {
 }
 
 dependencies {
-    testImplementation(project(":demo-main"))
+    testImplementation(project(":demo-ms"))
 }

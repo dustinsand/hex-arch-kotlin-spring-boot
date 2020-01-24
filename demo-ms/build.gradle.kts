@@ -1,4 +1,4 @@
-description = "demo-main"
+description = "demo-ms"
 
 plugins {
     kotlin("jvm")

@@ -34,13 +34,14 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 
 ![voter_hex_diagram](https://user-images.githubusercontent.com/5289/63655608-29921600-c758-11e9-8fb0-94b934edcdf8.png)
 
-# !!!1/20/20 TODO!!! - Update the 'Package Structure' below with details about how the Gradle multi-project structure works.
-Refactored build to use Gradle's Multi-Project to modularize application by layers of responsibility.
-Run all the tests: `./gradlew clean test`
-Run the application: `./gradlew clean :demo-main:bootRun`
+# Gradle Multi-Module Project
+Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.
+## Modules
+### demo-application
+The inner hexagon.
 
-# Package Structure
-## domain
+#### Package Structure
+##### domain
 Isolated from technical complexities of clients, frameworks and adapter (infrastructure) concerns. Contains the business models. Dependencies face inward so it does not depend on any layers outside of it. Why is this important?  Adapters (Infrastructure) can be changed without changes to the domain.
 
 The objects in this layer contain the data and the logic pertaining to the business. Independent of the business processes that trigger that logic, they are independent and completely unaware of the Application Layer.
@@ -48,12 +49,12 @@ The objects in this layer contain the data and the logic pertaining to the busin
 The business objects that represent something in the domain. Examples of these objects are, first of all, Entities but also Value Objects, Enums and any objects used in the Domain Model.
 
 The Domain Model is also where Domain Events “live”. These events are triggered when a specific set of data changes and they carry those changes with them. In other words, when an entity changes, a Domain Event is triggered and it carries the changed properties new values. These events are perfect, for example, to be used in Event Sourcing.
-### model
+###### model
 Using DDD this is where you define the Entities, Aggregates, Value Objects and Domain Events to model your domain. 
 
 [Refer to the DDD tactical patterns for descriptions](http://dddsample.sourceforge.net/patterns-reference.html)
 
-### service
+###### service
 Sometimes we encounter some domain logic that involves different entities, of the same type or not, and we feel that that domain logic does not belong in the entities themselves, we feel that that logic is not their direct responsibility.
 
 So our first reaction might be to place that logic outside the entities, in an Application Service. However, this means that that domain logic will not be reusable in other use cases: domain logic should stay out of the application layer!
@@ -67,17 +68,17 @@ Characteristics of a domain service are:
 * Too many domain services can lead to an anemic domain model that does not align well with the problem domain.
 * Too few domain services can lead to logic being incorrectly located on entities or value objects. This causes distinct concepts to be mixed up, which reduces clarity.
 
-## application layer
+##### application layer
 
-### port
+###### port
 
-#### input
+####### input
 This layer defines use case (application behavior) interfaces of the application.
 
-#### output
+####### output
 This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
 
-### service
+###### service
 The API representing the business use cases of the application. Dependent on the domain layer to orchestrate the business use cases and acts as a facade to the domain.  The domain model can continue to evolve without impacting clients. This layer is also responsible for coordinating notifications to other systems when significant events occur within the domain. 
 
 Clients must adapt to the input defined by the API and also transform the output from the API into their own format. The application layer then acts as an anti-corruption layer, ensuring the domain layer stays unaffected by external technical details.
@@ -88,14 +89,26 @@ Example role of an Application Service to fulfill a use case:
 2. tell those entities to do some domain logic
 3. and use the repository to persist the entities again
 
-## adapter layer
+### adapter
+The outer hexagon containing gradle module per adapter.
+
+##### adapter layer
 The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
 
-### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
+###### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
 The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
 
-### output (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
+###### output (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
+
+### demo-ms
+The microservice which is a composition of the demo-application and adapter modules.
+
+## Targets
+###Run the tests
+`./gradlew clean test`
+###Run the microservice
+`./gradlew clean :demo-ms:bootRun`
 
 # Communication Across Layers
 When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw, unchecked user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.
@@ -131,3 +144,4 @@ The references have great example diagrams to visually explain how the component
 * https://softwarecampament.wordpress.com/portsadapters/
 * https://www.youtube.com/watch?v=cPH5AiqLQTo
 * https://leanpub.com/get-your-hands-dirty-on-clean-architecture
+* https://www.youtube.com/watch?v=SxJPQ5qXisw

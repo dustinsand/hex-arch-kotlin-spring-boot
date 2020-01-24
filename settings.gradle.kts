@@ -16,7 +16,7 @@ pluginManagement {
 
 rootProject.name = "hex-arch-boot-demo"
 include(
-        "demo-main",
+        "demo-ms",
         "demo-application",
         "adapter:input:rest",
         "adapter:output:persistence",
