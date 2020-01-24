@@ -70,12 +70,10 @@ Characteristics of a domain service are:
 
 ##### application layer
 
-###### port
-
-####### input
+###### port.input
 This layer defines use case (application behavior) interfaces of the application.
 
-####### output
+###### port.output
 This layer defines infrastructure interfaces implemented by the adapters so there is no coupling between domain layer and technical code.
 
 ###### service
@@ -105,9 +103,9 @@ These are the outbound adapter technical details that the application uses (righ
 The microservice which is a composition of the demo-application and adapter modules.
 
 ## Targets
-###Run the tests
+### Run the tests
 `./gradlew clean test`
-###Run the microservice
+### Run the microservice
 `./gradlew clean :demo-ms:bootRun`
 
 # Communication Across Layers
