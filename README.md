@@ -10,7 +10,7 @@ Thank you to all the engineers who have shared their knowledge on this topic.  I
 
 # Project Description
 
-Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot.  The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture.  
+Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot.  The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture and apply the concepts.  
 
 # Objective Of This Architecture
 
@@ -24,6 +24,7 @@ Used to explain the project structure for a microservice using a hexagonal archi
 * Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
 * Modular. Minimizes tangled dependencies by decoupling the business logic from the technical code. Reduces the friction of extracting core domain objects to another context. Sometimes it makes design sense to start as more of a monolith and extract later to another context when there are strong reasons to do so.
 * Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
+* [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882). You will see influences from Clean code in the design. 
 
 # How it works
 The hexagon is divided into an inside and outside. The inside contains use cases (application services) and domain logic while the outside contains technical details like databases, messaging, caching.  The two parts are connected using "ports", exposed by the inside, and "adapters", implemented by the outside.
