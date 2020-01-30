@@ -1,0 +1,1 @@
+TODO - create a CLI application to demonstrate how CLI adapters can be implemented with the application core to create a CLI client to the Voter system. 
