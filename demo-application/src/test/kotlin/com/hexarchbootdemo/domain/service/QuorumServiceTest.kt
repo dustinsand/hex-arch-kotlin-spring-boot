@@ -1,8 +1,8 @@
 package com.hexarchbootdemo.domain.service
 
 import com.hexarchbootdemo.domain.model.Voter
-import java.util.Collections
 import java.util.*
+import java.util.Collections
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
