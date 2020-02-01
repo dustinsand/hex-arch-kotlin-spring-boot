@@ -6,7 +6,7 @@ interface CreditRatingGateway {
     fun findByName(firstName: String, lastName: String): CreditReport
 }
 
-class CreditReportGatewayExperian: CreditRatingGateway {
+class CreditReportGatewayExperian : CreditRatingGateway {
     override fun findByName(firstName: String, lastName: String): CreditReport {
         // Picture a REST call was made to Experian
         return CreditReport(725)

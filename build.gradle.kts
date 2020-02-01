@@ -7,6 +7,10 @@ buildscript {
         mavenCentral()
         maven(url = "https://repo.spring.io/snapshot")
         maven(url = "https://repo.spring.io/milestone")
+        maven(url = "https://plugins.gradle.org/m2/")
+    }
+    dependencies {
+        classpath("org.jmailen.gradle:kotlinter-gradle:2.3.0")
     }
 }
 
@@ -15,8 +19,7 @@ plugins {
 
     base
     java
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    id("org.springframework.boot") version "2.2.3.RELEASE"
+    id("org.springframework.boot") version "2.2.4.RELEASE"
     id("com.github.ben-manes.versions") version "0.27.0"
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.spring") version kotlinVersion apply false
@@ -72,6 +75,7 @@ subprojects {
 
     apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "org.jmailen.kotlinter")
 
     repositories {
         mavenCentral()

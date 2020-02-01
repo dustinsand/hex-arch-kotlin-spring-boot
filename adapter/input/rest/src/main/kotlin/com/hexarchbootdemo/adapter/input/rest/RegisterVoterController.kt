@@ -1,13 +1,13 @@
 package com.hexarchbootdemo.adapter.input.rest
 
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
+import java.net.URI
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 @RestController
 private class RegisterVoterController {
