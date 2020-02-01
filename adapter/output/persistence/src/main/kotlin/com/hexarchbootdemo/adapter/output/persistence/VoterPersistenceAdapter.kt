@@ -5,7 +5,7 @@ import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
 import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.Voter
-import java.util.UUID
+import java.util.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
