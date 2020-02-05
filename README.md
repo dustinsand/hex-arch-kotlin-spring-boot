@@ -2,9 +2,10 @@
 
 # Hexagonal Architecture (aka Ports and Adapters) / Clean Architecture / DDD
 
-“Allow an application to equally be driven by users, programs, automated test or batch scripts, and to be developed and tested in isolation from its eventual run-time devices and databases.
+>Allow an application to equally be driven by users, programs, automated test or batch scripts, and to be developed and tested in isolation from its eventual run-time devices and databases.
  
- As events arrive from the outside world at a port, a technology-specific adapter converts it into a usable procedure call or message and passes it to the application. The application is blissfully ignorant of the nature of the input device. When the application has something to send out, it sends it out through a port to an adapter, which creates the appropriate signals needed by the receiving technology (human or automated). The application has a semantically sound interaction with the adapters on all sides of it, without actually knowing the nature of the things on the other side of the adapters.”  –[Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
+>As events arrive from the outside world at a port, a technology-specific adapter converts it into a usable procedure call or message and passes it to the application. The application is blissfully ignorant of the nature of the input device. When the application has something to send out, it sends it out through a port to an adapter, which creates the appropriate signals needed by the receiving technology (human or automated). The application has a semantically sound interaction with the adapters on all sides of it, without actually knowing the nature of the things on the other side of the adapters.”  
+>– [Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
 
 Personally I've used hexagonal architectures with DDD for years because it aligns well with how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM microservices so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
 
