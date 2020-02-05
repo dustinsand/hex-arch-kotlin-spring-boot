@@ -33,13 +33,13 @@ Input and output "adapters" are at the outermost layer of the hexagon, the edge 
 
 Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers. Outside of the application layer, we have ports (Interfaces) and adapters (Implementations) that handle the technical delivery to the outside world.  The adapters handle the technical delivery by using the application services in the domain layer. 
 
-![voter_hex_diagram](https://user-images.githubusercontent.com/5289/73459969-b4012600-4345-11ea-9e76-7954caef79b9.png)
+![voter_hex_diagram](https://user-images.githubusercontent.com/5289/73803078-ae646f80-478d-11ea-8dd6-22bc7548ccf6.png)
 
 # Gradle Multi-Module Project
 Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.
 ## Modules
 ### voter-application
-The inner hexagon.
+The inner hexagon. See definition in 'How it works'
 
 #### Package Structure
 ##### domain
@@ -95,7 +95,7 @@ The outer hexagon containing a gradle module per adapter.  Output adapters can b
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 ### voter-ms
-The microservice which is a composition of the voter-application and adapter modules.
+The microservice which is a composition of the voter-application and adapter-output modules.
 
 #### adapter input layer
 The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
