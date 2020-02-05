@@ -38,7 +38,7 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 # Gradle Multi-Module Project
 Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.
 ## Modules
-### demo-application
+### voter-application
 The inner hexagon.
 
 #### Package Structure
@@ -88,26 +88,26 @@ Example role of an Application Service to fulfill a use case:
 2. tell those entities to do some domain logic
 3. and use the repository to persist the entities again
 
-### adapter
-The outer hexagon containing gradle module per adapter.
+### adapter-output
+The outer hexagon containing a gradle module per adapter.  Output adapters can be re-used by applications (microservice, lambda, cli). For example, voter-ms uses modules from adapter-output. 
 
-##### adapter layer
-The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
-
-###### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
-The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
-
-###### output (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
+#### output (preferred 'out' for the name, but 'out' is a reserved word in Kotlin)
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
-### demo-ms
-The microservice which is a composition of the demo-application and adapter modules.
+### voter-ms
+The microservice which is a composition of the voter-application and adapter modules.
+
+#### adapter input layer
+The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
+
+##### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
+The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
 
 ## Targets
 ### Run the tests
 `./gradlew clean test`
 ### Run the microservice
-`./gradlew clean :demo-ms:bootRun`
+`./gradlew clean :voter-ms:bootRun`
 
 # Communication Across Layers
 When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw, unchecked user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.

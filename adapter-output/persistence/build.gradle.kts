@@ -6,5 +6,5 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":demo-application"))
+    implementation(project(":voter-application"))
 }

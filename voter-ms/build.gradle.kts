@@ -1,4 +1,4 @@
-description = "demo-ms"
+description = "voter-ms"
 
 plugins {
     kotlin("jvm")
@@ -9,10 +9,9 @@ plugins {
 dependencies {
     val archunitVersion: String by project
 
-    implementation(project(":demo-application"))
-    implementation(project(":adapter:input:rest"))
-    implementation(project(":adapter:output:persistence"))
-    implementation(project(":adapter:output:rpc"))
+    implementation(project(":voter-application"))
+    implementation(project(":adapter-output:persistence"))
+    implementation(project(":adapter-output:rpc"))
 
     testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
     testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:$archunitVersion")
