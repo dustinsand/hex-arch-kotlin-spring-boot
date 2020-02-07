@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven(url = "https://repo.spring.io/snapshot")
         maven(url = "https://repo.spring.io/milestone")
@@ -11,6 +12,7 @@ buildscript {
     }
     dependencies {
         classpath("org.jmailen.gradle:kotlinter-gradle:2.3.0")
+//        classpath("io.quarkus:quarkus-gradle-plugin:1.0.1.Final")
     }
 }
 
@@ -78,6 +80,7 @@ subprojects {
     apply(plugin = "org.jmailen.kotlinter")
 
     repositories {
+        jcenter()
         mavenCentral()
     }
 
@@ -85,7 +88,7 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
         implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
             exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
