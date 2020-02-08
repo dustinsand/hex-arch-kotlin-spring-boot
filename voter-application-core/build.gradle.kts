@@ -1,4 +1,4 @@
-description = "voter-application"
+description = "voter-application-core"
 
 plugins {
     kotlin("jvm")

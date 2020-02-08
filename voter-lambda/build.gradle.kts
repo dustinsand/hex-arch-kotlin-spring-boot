@@ -13,7 +13,7 @@ dependencies {
     val quarkusPlatformArtifactId: String by project
     val quarkusPlatformVersion: String by project
 
-    implementation(project(":voter-application"))
+    implementation(project(":voter-application-core"))
     implementation(project(":adapter-output:persistence"))
     implementation("io.quarkus:quarkus-spring-boot-properties")
     implementation("io.quarkus:quarkus-spring-di")

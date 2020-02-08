@@ -18,6 +18,6 @@ rootProject.name = "hex-arch-boot-demo"
 include(
         "voter-ms",
         "voter-lambda",
-        "voter-application",
+        "voter-application-core",
         "adapter-output:persistence",
         "adapter-output:rpc")

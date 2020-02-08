@@ -42,7 +42,7 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 # Gradle Multi-Module Project
 Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.
 ## Modules
-### voter-application
+### voter-application-core
 The inner hexagon. See definition in 'How it works'
 
 #### Package Structure
@@ -99,7 +99,7 @@ The outer hexagon containing a gradle module per adapter.  Output adapters can b
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 ### voter-ms
-The microservice is a composition of the voter-application and adapter-output modules.
+The microservice is a composition of the voter-application-core and adapter-output modules.
 
 #### adapter input layer
 The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
@@ -108,8 +108,8 @@ The adapter layer provides the technical capabilities of the application to be c
 The entry point (left side of diagram) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
 
 ### voter-lambda
-The lambda is a composition of the voter-application and adapter-output modules. It demonstrates: 
-* how Spring beans declared in external modules (voter-application and adapter-output) can be used together with Quarkus
+The lambda is a composition of the voter-application-core and adapter-output modules. It demonstrates: 
+* how Spring beans declared in external modules (voter-application-core and adapter-output) can be used together with Quarkus
 * how a native binary can be created so there is no cold start latency cost when executed in AWS Lambda 
 
 #### adapter input layer

@@ -9,7 +9,7 @@ plugins {
 dependencies {
     val archunitVersion: String by project
 
-    implementation(project(":voter-application"))
+    implementation(project(":voter-application-core"))
     implementation(project(":adapter-output:persistence"))
     implementation(project(":adapter-output:rpc"))
 
