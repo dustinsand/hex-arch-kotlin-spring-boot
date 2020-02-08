@@ -7,7 +7,6 @@ import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import javax.inject.Inject
 import javax.inject.Named
 
-
 @Named("test")
 class TestLambda : RequestHandler<InputObject, OutputObject> {
     @Inject

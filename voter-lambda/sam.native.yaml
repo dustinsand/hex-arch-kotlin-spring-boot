@@ -12,7 +12,7 @@
       Properties:
         Handler: not.used.in.provided.runtimei
         Runtime: provided
-        CodeUri: target/function.zip
+        CodeUri: build/function.zip
         MemorySize: 128
         Policies: AWSLambdaBasicExecutionRole
         Timeout: 15

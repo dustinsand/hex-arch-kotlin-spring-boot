@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Blog post the issue I ran into and explains why I had to do it this way. https://github.com/quarkusio/quarkus/issues/4254
+
+./voter-lambda-1.0-SNAPSHOT-runner -Djava.io.tmpdir=/tmp

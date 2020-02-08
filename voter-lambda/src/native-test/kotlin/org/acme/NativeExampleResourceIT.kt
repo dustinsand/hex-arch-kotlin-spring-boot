@@ -1,6 +1,6 @@
-//package org.acme
+// package org.acme
 //
-//import io.quarkus.test.junit.NativeImageTest
+// import io.quarkus.test.junit.NativeImageTest
 //
-//@NativeImageTest
-//open class NativeExampleResourceIT : ExampleResourceTest()
+// @NativeImageTest
+// open class NativeExampleResourceIT : ExampleResourceTest()

@@ -6,8 +6,8 @@ function cmd_create() {
     --handler ${HANDLER} \
     --runtime ${RUNTIME} \
     --role ${LAMBDA_ROLE_ARN} \
-    --memory-size 256 \
-    --timeout 10 \
+    --memory-size 128 \
+    --timeout 3 \
     ${LAMBDA_META}
 }
 
@@ -39,7 +39,7 @@ LAMBDA_ROLE_ARN=arn:aws:iam::408207669206:role/lambda-ex
 if [ "$1" == "native" ]
 then
   RUNTIME=provided
-  ZIP_FILE=fileb://target/function.zip
+  ZIP_FILE=fileb://build/function.zip
   FUNCTION_NAME=FooNativeFunction
   LAMBDA_META="--environment Variables={DISABLE_SIGNAL_HANDLERS=true}"
   shift

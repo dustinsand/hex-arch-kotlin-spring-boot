@@ -1,3 +1,5 @@
+import io.quarkus.gradle.tasks.QuarkusNative
+
 plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
@@ -25,6 +27,12 @@ dependencies {
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+}
+
+tasks {
+    named<QuarkusNative>("buildNative") {
+        setEnableHttpUrlHandler(true)
+    }
 }
 
 quarkus {

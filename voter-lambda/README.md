@@ -33,3 +33,14 @@ Or you can use Docker to build the native executable using: `./gradlew buildNati
 You can then execute your binary: `./build/code-with-quarkus-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling#building-a-native-executable .
+
+## Deploying the lambda to AWS
+
+### JDK8 Lambda
+sh manage.sh create
+
+### Native Lambda
+cd <root project>/voter-lambda
+../gradlew buildNative --docker-build=true --enable-http-url-handler
+zip -j build/function.zip src/main/resources/bin/bootstrap build/voter-lambda-1.0-SNAPSHOT-runner
+sh manage.sh native create 
