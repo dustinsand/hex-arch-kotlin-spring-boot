@@ -6,8 +6,8 @@ function cmd_create() {
     --handler ${HANDLER} \
     --runtime ${RUNTIME} \
     --role ${LAMBDA_ROLE_ARN} \
-    --memory-size 128 \
-    --timeout 3 \
+    --memory-size 256 \
+    --timeout 10 \
     ${LAMBDA_META}
 }
 
