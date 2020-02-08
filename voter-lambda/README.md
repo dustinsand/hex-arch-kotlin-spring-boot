@@ -4,6 +4,13 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Local One Time Setup
+
+### Create an Execution Role
+View the [Getting Started Guide](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html) for deploying a lambda with AWS CLI. Specifically, make sure you have created an Execution Role. To use the provided scripts, you will either need to define a LAMBDA_ROLE_ARN environment variable in your profile or define it prior to executing the scripts like this:
+
+export LAMBDA_ROLE_ARN="arn:aws:iam::1234567890:role/lambda-role"
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:

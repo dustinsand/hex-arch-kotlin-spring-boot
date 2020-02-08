@@ -34,7 +34,6 @@ FUNCTION_NAME=VoterFunction
 HANDLER=io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
 RUNTIME=java8
 ZIP_FILE=fileb://build/voter-lambda-1.0-SNAPSHOT-runner.jar
-LAMBDA_ROLE_ARN=arn:aws:iam::408207669206:role/lambda-ex
 
 if [ "$1" == "native" ]
 then
