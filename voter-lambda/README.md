@@ -26,7 +26,7 @@ If you want to build an _über-jar_, just add the `--uber-jar` option to the com
 
 ## Creating a native executable
 
-You can create a native executable using: `./gradlew buildNative`.
+(not working) You can create a native executable using: `./gradlew buildNative`.
 
 Or you can use Docker to build the native executable using: `./gradlew buildNative --docker-build=true`.
 

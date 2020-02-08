@@ -19,9 +19,13 @@ internal class VoterRepository {
     private final val databaseMap = mutableMapOf<UUID, Voter>()
 
     init {
-        // Init map with one voter
+        // Init voter map
         val voter1 = Voter(id = UUID.randomUUID(), firstName = "Dustin", lastName = "Shimono")
+        val voter2 = Voter(id = UUID.randomUUID(), firstName = "Sandy", lastName = "Shimono")
+        val voter3 = Voter(id = UUID.randomUUID(), firstName = "Tim", lastName = "Coocha")
         databaseMap[voter1.id] = voter1
+        databaseMap[voter2.id] = voter2
+        databaseMap[voter3.id] = voter3
     }
 
     fun findAll(): List<Voter> {

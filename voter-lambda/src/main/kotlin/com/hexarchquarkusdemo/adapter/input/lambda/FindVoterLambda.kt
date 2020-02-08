@@ -4,21 +4,23 @@ import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNameQuery
 import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
-import com.hexarchquarkusdemo.adapter.input.lambda.data.InputObject
-import com.hexarchquarkusdemo.adapter.input.lambda.data.OutputObject
+import com.hexarchquarkusdemo.adapter.input.lambda.data.FindVoterCommand
+import com.hexarchquarkusdemo.adapter.input.lambda.data.VoterJson
 import javax.inject.Inject
 import javax.inject.Named
 
 @Named("findVoter")
-class FindVoterLambda : RequestHandler<InputObject, OutputObject> {
+class FindVoterLambda : RequestHandler<FindVoterCommand, List<VoterJson>> {
     @Inject
     lateinit var findVoterPort: FindVoterPort
 
-    override fun handleRequest(input: InputObject, context: Context): OutputObject {
+    override fun handleRequest(command: FindVoterCommand, context: Context): List<VoterJson> {
 
-        println("Voter[0] firstname = " + findVoterPort.findVotersByLastName(FindByLastNameQuery("Shimono"))[0].firstName)
-
-        val result: String = input.greeting + " " + input.name
-        return OutputObject(result, context.awsRequestId)
+        val voters = findVoterPort.findVotersByLastName(FindByLastNameQuery(command.lastName))
+                .map {
+                    VoterJson(id = it.id, firstName = it.firstName, lastName = it.lastName)
+                }
+        println("Found Voters: $voters")
+        return voters
     }
 }
