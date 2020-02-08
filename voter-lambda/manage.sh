@@ -40,7 +40,7 @@ if [ "$1" == "native" ]
 then
   RUNTIME=provided
   ZIP_FILE=fileb://build/function.zip
-  FUNCTION_NAME=FooNativeFunction
+  FUNCTION_NAME=VoterNativeFunction
   LAMBDA_META="--environment Variables={DISABLE_SIGNAL_HANDLERS=true}"
   shift
 fi

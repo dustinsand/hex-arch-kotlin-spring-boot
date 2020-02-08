@@ -13,7 +13,7 @@ Thank you to all the engineers who have shared their knowledge on this topic.  I
 
 # Project Description
 
-Used to explain the project structure for a microservice using a hexagonal architecture with Kotlin and Spring Boot.  The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture and apply the concepts.  
+This project is used to show how the hexagonal architecture can be applied to a Microservice (Spring Boot) and a native AWS Lambda (Quarkus) in a multi module project.  The multi module project allows for code re-use across modules. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture and apply the concepts.  
 
 # Objective Of This Architecture
 
@@ -98,19 +98,32 @@ The outer hexagon containing a gradle module per adapter.  Output adapters can b
 These are the outbound adapter technical details that the application uses (right side of diagram below in tan), for example, a database, a 3rd party APIs.  These are needed to support the domain use cases.
 
 ### voter-ms
-The microservice which is a composition of the voter-application and adapter-output modules.
+The microservice is a composition of the voter-application and adapter-output modules.
 
 #### adapter input layer
-The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the  application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
+The adapter layer provides the technical capabilities of the application to be consumed, such as a UI, web services, messaging endpoints. It also provides the application the ability to consume external services such as databases, 3rd party services, logging, security and other bounded contexts.  These are all technical details that should not directly affect the use case exposed and the domain logic of an application. Typically hexagonal architectures diagram the left side (see "in" below) for the the clients which use the domain.  The right side (see "out" below) of the diagram are the services used by the domain.  
 
 ##### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
-The entry point (left side of diagram below in green) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
+The entry point (left side of diagram) of clients to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
+
+### voter-lambda
+The lambda is a composition of the voter-application and adapter-output modules. It demonstrates: 
+* how Spring beans declared in external modules (voter-application and adapter-output) can be used together with Quarkus
+* how a native binary can be created so there is no cold start latency cost when executed in AWS Lambda 
+
+#### adapter input layer
+The adapter layer provides the technical capabilities of the application to be triggered by AWS Lambda.  
+
+##### input (preferred 'in' for the name, but 'in' is a reserved word in Kotlin)
+The entry point (left side of diagram - TODO create AWS lambda diagram) of AWS Triggers to use the application layer. The inbound adapter translates whatever comes from a client into a method call in the application layer.
 
 ## Targets
 ### Run the tests
 `./gradlew clean test`
 ### Run the microservice
 `./gradlew clean :voter-ms:bootRun`
+### Run the lambda
+See the [Lambda README](voter-lambda/README.md)
 
 # Communication Across Layers
 When communicating across layers, to prevent exposing the details of the domain model to the outside world, you don’t pass domain objects across boundaries. For the same reasons, you don’t send raw, unchecked user input straight into the domain layer. Instead, you use simple data transfer objects (DTOs), presentation models, and application event objects to communicate changes or actions in the domain.

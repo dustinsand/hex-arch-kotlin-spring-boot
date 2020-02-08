@@ -37,14 +37,35 @@ If you want to learn more about building native executables, please consult http
 ## Deploying the lambda to AWS
 
 ### JDK8 Lambda
+```
 cd <root project>/voter-lambda
 ../gradlew quarkusBuild --uber-jar
 sam local invoke --template sam.jvm.yaml --event payload.json
 sh manage.sh create
+Use AWS Lambda console to invoke it using the Test feature. Example test payload to pass: { "lastName": "shimono" }
+```
 
 ### Native Lambda
+```
 cd <root project>/voter-lambda
 ../gradlew buildNative --docker-build=true --enable-http-url-handler
 zip -j build/function.zip src/main/resources/native/bootstrap build/voter-lambda-1.0-SNAPSHOT-runner
 sam local invoke --template sam.native.yaml --event payload.json
-sh manage.sh native create 
+sh manage.sh native create
+Use AWS Lambda console to invoke it using the Test feature. Example test payload to pass: { "lastName": "shimono" }
+```
+
+# AWS Lambda Performance Results
+
+| Runtime | Cold Start Latency* | Warm Latency | Resources Configured | Max Memory Used | Artifact Size |
+| ------- | -------: | -------: | -------: | -------: | -------: | 
+| JDK 8   | 765 ms | .73 ms | 256 MB | 124 MB | 38 MB|
+| Custom (Native) | 18 ms | .99 ms | 256 MB | 72 MB | 11 MB|
+
+Conclusion
+
+* Native results show JVM languages can be used for lambdas to have similar latency and resource utilization as other languages like Go, Python and Node   
+* Execution times were essentially the same when the lambda was warm
+* Cold Start is a serious concern when the runtime was JDK 8 and latency is important
+
+Note: Cold start latency fluctuated and were not consistent for both JDK 8 and Custom (Native).     
