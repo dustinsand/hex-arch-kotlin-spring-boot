@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 // TODO why is this not being recognized?
 @Singleton
-class JacksonObjectMapperCustomizer : ObjectMapperCustomizer {
+private class JacksonObjectMapperCustomizer : ObjectMapperCustomizer {
     override fun customize(mapper: ObjectMapper) {
         // register kotlin module for data classes
         mapper.registerModule(KotlinModule())

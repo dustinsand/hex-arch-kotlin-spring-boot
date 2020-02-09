@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 @SpringBootApplication
-class HexArchBootDemoApplication
+private class HexArchBootDemoApplication
 
 fun main(args: Array<String>) {
     runApplication<HexArchBootDemoApplication>(*args)
@@ -14,4 +14,4 @@ fun main(args: Array<String>) {
 
 @Configuration
 @ComponentScan
-class MainConfig
+private class MainConfig

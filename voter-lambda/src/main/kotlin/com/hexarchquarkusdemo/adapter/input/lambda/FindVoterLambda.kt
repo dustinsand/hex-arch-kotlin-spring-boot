@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @Named("findVoter")
-class FindVoterLambda : RequestHandler<FindVoterCommand, List<VoterJson>> {
+private class FindVoterLambda : RequestHandler<FindVoterCommand, List<VoterJson>> {
     @Inject
     lateinit var findVoterPort: FindVoterPort
 
