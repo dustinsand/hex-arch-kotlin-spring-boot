@@ -36,8 +36,8 @@ Input and output "adapters" are at the outermost layer of the hexagon, the edge 
 
 Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers. Outside of the application layer, we have ports (Interfaces) and adapters (Implementations) that handle the technical delivery to the outside world.  The adapters handle the technical delivery by using the application services in the domain layer. 
 
-![voter_hex_diagram](https://user-images.githubusercontent.com/5289/73803078-ae646f80-478d-11ea-8dd6-22bc7548ccf6.png)
-![lambda diagram](https://user-images.githubusercontent.com/5289/74090347-3392a180-4a78-11ea-8d62-4011b68add62.png)
+![voter_hex_diagram](https://user-images.githubusercontent.com/5289/74338280-de080e80-4d6f-11ea-9ddd-4c0edc5fd223.png)
+![lambda diagram](https://user-images.githubusercontent.com/5289/74338279-de080e80-4d6f-11ea-9924-0968a11976e6.png)
 
 # Gradle Multi-Module Project
 Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.
