@@ -12,7 +12,6 @@ buildscript {
     }
     dependencies {
         classpath("org.jmailen.gradle:kotlinter-gradle:2.3.0")
-//        classpath("io.quarkus:quarkus-gradle-plugin:1.0.1.Final")
     }
 }
 
@@ -83,6 +82,8 @@ subprojects {
         jcenter()
         mavenCentral()
     }
+
+    // TODO move dependencies to where actually used in subproject
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")

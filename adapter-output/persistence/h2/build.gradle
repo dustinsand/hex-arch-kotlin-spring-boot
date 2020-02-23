@@ -1,0 +1,107 @@
+plugins {
+    id 'java'
+    id 'kotlin'
+    id 'kotlin-spring'
+    id 'nu.studer.jooq' version '4.1'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id "com.github.honourednihilist.gradle-postgresql-embedded" version "0.4.0"
+    id "org.flywaydb.flyway" version "6.2.3"
+    id "org.jetbrains.kotlin.jvm"
+    id "org.jetbrains.kotlin.plugin.spring"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation project(':voter-application-core')
+    implementation 'org.flywaydb:flyway-core:5.2.4'
+    implementation 'org.jooq:jooq'
+    implementation 'org.jooq:jooq-meta'
+    implementation 'org.jooq:jooq-codegen'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.postgresql:postgresql:42.2.5'
+    jooqRuntime 'org.postgresql:postgresql:42.2.5'
+    testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1'
+    testImplementation 'io.zonky.test:embedded-database-spring-test:1.3.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+ext {
+    postgresEmbeddedHost = "localhost"
+    postgresEmbeddedPort = 54321
+    postgresEmbeddedDbName = "voter"
+    postgresEmbeddedUser = "username"
+    postgresEmbeddedPassword = "password"
+    postgresEmbeddedSchema = "public"
+}
+
+jooq {
+    version = '3.13.0'
+    edition = 'OSS'
+    voter(sourceSets.main) {
+        jdbc {
+            driver = 'org.postgresql.Driver'
+            url = "jdbc:postgresql://${postgresEmbeddedHost}:${postgresEmbeddedPort}/${postgresEmbeddedDbName}"
+            user = postgresEmbeddedUser
+            password = postgresEmbeddedPassword
+            properties {
+                property {
+                    key = 'ssl'
+                    value = 'false'
+                }
+            }
+        }
+        generator {
+            name = 'org.jooq.codegen.DefaultGenerator'
+            strategy {
+                name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+            }
+            database {
+                name = 'org.jooq.meta.postgres.PostgresDatabase'
+                inputSchema = postgresEmbeddedSchema
+                includes = '.*'
+                excludes = ''
+            }
+            // Properties documentation: https://www.jooq.org/doc/3.11/manual/code-generation/codegen-advanced/
+            generate {
+                daos = true
+                relations = true
+                deprecated = true
+                records = true
+                immutablePojos = true
+                fluentSetters = true
+            }
+            target {
+                packageName = 'com.hexarchbootdemo.adapter.output.persistence.h2.generated-sources.jooq'
+                directory = 'src/main/kotlin/generated-sources/jooq'
+            }
+        }
+    }
+}
+
+flyway {
+    url = "jdbc:postgresql://${postgresEmbeddedHost}:${postgresEmbeddedPort}/${postgresEmbeddedDbName}"
+    user = postgresEmbeddedUser
+    password = postgresEmbeddedPassword
+    schemas = [postgresEmbeddedSchema]
+    locations = ["filesystem:$project.projectDir/src/main/resources/db/migration/postgresql"]
+}
+
+postgresEmbedded {
+    version = "V10"
+    host = postgresEmbeddedHost
+    port = postgresEmbeddedPort // zero value means a random port
+    dbName = postgresEmbeddedDbName
+    stopWhenBuildFinished = true
+    timeoutMillisBeforeStop = 0
+}
+
+compileKotlin.dependsOn generateVoterJooqSchemaSource
+flywayMigrate.dependsOn startPostgres
+generateVoterJooqSchemaSource.dependsOn flywayMigrate
+test.dependsOn flywayClean

@@ -1,4 +1,4 @@
-description = "adapter-output-persistence"
+description = "adapter-output-persistence-memory"
 
 plugins {
     kotlin("jvm")

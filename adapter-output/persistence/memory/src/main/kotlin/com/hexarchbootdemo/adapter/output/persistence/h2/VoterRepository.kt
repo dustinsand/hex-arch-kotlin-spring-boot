@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.adapter.output.persistence
+package com.hexarchbootdemo.adapter.output.persistence.h2
 
 import com.hexarchbootdemo.domain.model.Voter
 import java.util.UUID

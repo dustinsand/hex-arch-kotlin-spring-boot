@@ -14,7 +14,7 @@ dependencies {
     val quarkusPlatformVersion: String by project
 
     implementation(project(":voter-application-core"))
-    implementation(project(":adapter-output:persistence"))
+    implementation(project(":adapter-output:persistence:memory"))
     implementation("io.quarkus:quarkus-spring-boot-properties")
     implementation("io.quarkus:quarkus-spring-di")
     implementation("io.quarkus:quarkus-resteasy-jackson")
