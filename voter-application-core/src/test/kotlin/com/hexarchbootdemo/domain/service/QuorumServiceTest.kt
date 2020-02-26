@@ -4,7 +4,7 @@ import com.hexarchbootdemo.domain.model.Voter
 import java.util.Collections
 import java.util.UUID
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class QuorumServiceTest {
     @Test

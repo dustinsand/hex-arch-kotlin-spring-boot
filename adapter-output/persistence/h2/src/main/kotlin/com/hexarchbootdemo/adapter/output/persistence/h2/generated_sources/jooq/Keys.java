@@ -18,7 +18,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>public</code> schema.
+ * the <code>VOTER</code> schema.
  */
 @Generated(
     value = {
@@ -40,7 +40,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = UniqueKeys0.FLYWAY_SCHEMA_HISTORY_PK;
-    public static final UniqueKey<VoterRecord> VOTER_PKEY = UniqueKeys0.VOTER_PKEY;
+    public static final UniqueKey<VoterRecord> CONSTRAINT_4 = UniqueKeys0.CONSTRAINT_4;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -53,6 +53,6 @@ public class Keys {
 
     private static class UniqueKeys0 {
         public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, "flyway_schema_history_pk", new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
-        public static final UniqueKey<VoterRecord> VOTER_PKEY = Internal.createUniqueKey(Voter.VOTER, "voter_pkey", new TableField[] { Voter.VOTER.ID }, true);
+        public static final UniqueKey<VoterRecord> CONSTRAINT_4 = Internal.createUniqueKey(Voter.VOTER_, "CONSTRAINT_4", new TableField[] { Voter.VOTER_.ID }, true);
     }
 }

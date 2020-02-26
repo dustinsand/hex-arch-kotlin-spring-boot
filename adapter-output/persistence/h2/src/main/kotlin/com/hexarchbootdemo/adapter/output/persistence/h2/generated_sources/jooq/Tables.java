@@ -11,7 +11,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in public
+ * Convenience access to all tables in VOTER
  */
 @Generated(
     value = {
@@ -24,12 +24,12 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>public.flyway_schema_history</code>.
+     * The table <code>VOTER.flyway_schema_history</code>.
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * The table <code>public.voter</code>.
+     * The table <code>VOTER.VOTER</code>.
      */
-    public static final Voter VOTER = Voter.VOTER;
+    public static final Voter VOTER_ = Voter.VOTER_;
 }

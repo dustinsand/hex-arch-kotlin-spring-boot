@@ -5,7 +5,6 @@ package com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq
 
 
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Keys;
-import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Public;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.records.VoterRecord;
 
 import java.util.Arrays;
@@ -41,12 +40,12 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Voter extends TableImpl<VoterRecord> {
 
-    private static final long serialVersionUID = -1456380118;
+    private static final long serialVersionUID = -1936031844;
 
     /**
-     * The reference instance of <code>public.voter</code>
+     * The reference instance of <code>VOTER.VOTER</code>
      */
-    public static final Voter VOTER = new Voter();
+    public static final Voter VOTER_ = new Voter();
 
     /**
      * The class holding records for this type
@@ -57,39 +56,39 @@ public class Voter extends TableImpl<VoterRecord> {
     }
 
     /**
-     * The column <code>public.voter.id</code>.
+     * The column <code>VOTER.VOTER.ID</code>.
      */
-    public final TableField<VoterRecord, UUID> ID = createField(DSL.name("id"), org.jooq.impl.SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<VoterRecord, UUID> ID = createField(DSL.name("ID"), org.jooq.impl.SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>public.voter.first_name</code>.
+     * The column <code>VOTER.VOTER.FIRST_NAME</code>.
      */
-    public final TableField<VoterRecord, String> FIRST_NAME = createField(DSL.name("first_name"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<VoterRecord, String> FIRST_NAME = createField(DSL.name("FIRST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>public.voter.last_name</code>.
+     * The column <code>VOTER.VOTER.LAST_NAME</code>.
      */
-    public final TableField<VoterRecord, String> LAST_NAME = createField(DSL.name("last_name"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<VoterRecord, String> LAST_NAME = createField(DSL.name("LAST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * Create a <code>public.voter</code> table reference
+     * Create a <code>VOTER.VOTER</code> table reference
      */
     public Voter() {
-        this(DSL.name("voter"), null);
+        this(DSL.name("VOTER"), null);
     }
 
     /**
-     * Create an aliased <code>public.voter</code> table reference
+     * Create an aliased <code>VOTER.VOTER</code> table reference
      */
     public Voter(String alias) {
-        this(DSL.name(alias), VOTER);
+        this(DSL.name(alias), VOTER_);
     }
 
     /**
-     * Create an aliased <code>public.voter</code> table reference
+     * Create an aliased <code>VOTER.VOTER</code> table reference
      */
     public Voter(Name alias) {
-        this(alias, VOTER);
+        this(alias, VOTER_);
     }
 
     private Voter(Name alias, Table<VoterRecord> aliased) {
@@ -101,22 +100,22 @@ public class Voter extends TableImpl<VoterRecord> {
     }
 
     public <O extends Record> Voter(Table<O> child, ForeignKey<O, VoterRecord> key) {
-        super(child, key, VOTER);
+        super(child, key, VOTER_);
     }
 
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Voter.VOTER;
     }
 
     @Override
     public UniqueKey<VoterRecord> getPrimaryKey() {
-        return Keys.VOTER_PKEY;
+        return Keys.CONSTRAINT_4;
     }
 
     @Override
     public List<UniqueKey<VoterRecord>> getKeys() {
-        return Arrays.<UniqueKey<VoterRecord>>asList(Keys.VOTER_PKEY);
+        return Arrays.<UniqueKey<VoterRecord>>asList(Keys.CONSTRAINT_4);
     }
 
     @Override

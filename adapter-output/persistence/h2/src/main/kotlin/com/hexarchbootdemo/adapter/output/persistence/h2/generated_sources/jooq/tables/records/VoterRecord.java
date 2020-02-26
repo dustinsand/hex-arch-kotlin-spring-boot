@@ -30,10 +30,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VoterRecord extends UpdatableRecordImpl<VoterRecord> implements Record3<UUID, String, String> {
 
-    private static final long serialVersionUID = 147945156;
+    private static final long serialVersionUID = 1801580303;
 
     /**
-     * Setter for <code>public.voter.id</code>.
+     * Setter for <code>VOTER.VOTER.ID</code>.
      */
     public VoterRecord setId(UUID value) {
         set(0, value);
@@ -41,14 +41,14 @@ public class VoterRecord extends UpdatableRecordImpl<VoterRecord> implements Rec
     }
 
     /**
-     * Getter for <code>public.voter.id</code>.
+     * Getter for <code>VOTER.VOTER.ID</code>.
      */
     public UUID getId() {
         return (UUID) get(0);
     }
 
     /**
-     * Setter for <code>public.voter.first_name</code>.
+     * Setter for <code>VOTER.VOTER.FIRST_NAME</code>.
      */
     public VoterRecord setFirstName(String value) {
         set(1, value);
@@ -56,14 +56,14 @@ public class VoterRecord extends UpdatableRecordImpl<VoterRecord> implements Rec
     }
 
     /**
-     * Getter for <code>public.voter.first_name</code>.
+     * Getter for <code>VOTER.VOTER.FIRST_NAME</code>.
      */
     public String getFirstName() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>public.voter.last_name</code>.
+     * Setter for <code>VOTER.VOTER.LAST_NAME</code>.
      */
     public VoterRecord setLastName(String value) {
         set(2, value);
@@ -71,7 +71,7 @@ public class VoterRecord extends UpdatableRecordImpl<VoterRecord> implements Rec
     }
 
     /**
-     * Getter for <code>public.voter.last_name</code>.
+     * Getter for <code>VOTER.VOTER.LAST_NAME</code>.
      */
     public String getLastName() {
         return (String) get(2);
@@ -102,17 +102,17 @@ public class VoterRecord extends UpdatableRecordImpl<VoterRecord> implements Rec
 
     @Override
     public Field<UUID> field1() {
-        return Voter.VOTER.ID;
+        return Voter.VOTER_.ID;
     }
 
     @Override
     public Field<String> field2() {
-        return Voter.VOTER.FIRST_NAME;
+        return Voter.VOTER_.FIRST_NAME;
     }
 
     @Override
     public Field<String> field3() {
-        return Voter.VOTER.LAST_NAME;
+        return Voter.VOTER_.LAST_NAME;
     }
 
     @Override
@@ -179,14 +179,14 @@ public class VoterRecord extends UpdatableRecordImpl<VoterRecord> implements Rec
      * Create a detached VoterRecord
      */
     public VoterRecord() {
-        super(Voter.VOTER);
+        super(Voter.VOTER_);
     }
 
     /**
      * Create a detached, initialised VoterRecord
      */
     public VoterRecord(UUID id, String firstName, String lastName) {
-        super(Voter.VOTER);
+        super(Voter.VOTER_);
 
         set(0, id);
         set(1, firstName);
