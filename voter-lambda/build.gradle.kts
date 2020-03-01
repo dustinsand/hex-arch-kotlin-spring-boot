@@ -25,6 +25,7 @@ dependencies {
     implementation("io.quarkus:quarkus-amazon-lambda")
     implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-agroal")
+    implementation("io.quarkus:quarkus-flyway")
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-resteasy")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

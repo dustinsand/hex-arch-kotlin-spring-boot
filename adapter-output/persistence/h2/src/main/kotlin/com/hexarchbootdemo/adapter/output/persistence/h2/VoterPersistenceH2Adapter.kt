@@ -12,7 +12,7 @@ import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
-@Repository//("VoterPersistenceH2Adapter")
+@Repository("VoterPersistenceH2Adapter")
 class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContext) : FindVoterPort, RegisterVoterPort {
 
     override fun findVotersByLastName(query: FindByLastNameQuery): List<Voter> {

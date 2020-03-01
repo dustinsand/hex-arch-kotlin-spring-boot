@@ -86,9 +86,6 @@ flyway {
 jar {
     enabled = true
 }
-//bootJar {
-//    mainClassName = 'com.hexarchbootdemo.JooqApplication'
-//}
 
 compileKotlin.dependsOn generateVoterJooqSchemaSource
 generateVoterJooqSchemaSource.dependsOn flywayMigrate
