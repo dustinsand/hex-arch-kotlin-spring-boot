@@ -43,7 +43,7 @@ ext {
 }
 
 jooq {
-    version = '3.13.0'
+    version = '3.12.3'
     edition = 'OSS'
     voter(sourceSets.main) {
         jdbc {
