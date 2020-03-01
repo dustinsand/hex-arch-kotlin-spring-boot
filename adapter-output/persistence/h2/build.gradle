@@ -14,14 +14,22 @@ repositories {
     jcenter()
 }
 
+//configurations {
+//    all*.exclude group: 'jakarta.xml.bind', module:'jakarta.xml.bind-api'
+//}
+
 dependencies {
     implementation project(':voter-application-core')
     implementation 'org.flywaydb:flyway-core:6.2.4'
     implementation 'org.jooq:jooq'
     implementation 'org.jooq:jooq-meta'
     implementation 'org.jooq:jooq-codegen'
-    implementation 'org.springframework.boot:spring-boot-starter-jooq'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation ('org.springframework.boot:spring-boot-starter-jooq') {
+        exclude group: "jakarta.xml.bind", module: "jakarta.xml.bind-api"
+    }
+    implementation ('org.springframework.boot:spring-boot-starter-data-jpa:2.2.3.RELEASE') {
+        exclude group: "jakarta.xml.bind", module: "jakarta.xml.bind-api"
+    }
     jooqRuntime 'com.h2database:h2:1.4.200'
     testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -75,6 +83,12 @@ flyway {
     schemas = [h2Schema]
     locations = ["filesystem:$project.projectDir/src/main/resources/db/migration"]
 }
+jar {
+    enabled = true
+}
+//bootJar {
+//    mainClassName = 'com.hexarchbootdemo.JooqApplication'
+//}
 
 compileKotlin.dependsOn generateVoterJooqSchemaSource
 generateVoterJooqSchemaSource.dependsOn flywayMigrate

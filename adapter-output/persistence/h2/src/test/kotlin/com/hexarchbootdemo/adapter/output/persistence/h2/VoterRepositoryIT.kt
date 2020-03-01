@@ -1,5 +1,6 @@
 package com.hexarchbootdemo.adapter.output.persistence.h2
 
+import com.hexarchbootdemo.JooqApplication
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import org.assertj.core.api.Assertions.assertThat
 import org.flywaydb.test.annotation.FlywayTest
