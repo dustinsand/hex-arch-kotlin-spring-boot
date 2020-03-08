@@ -21,7 +21,6 @@ import reactor.core.publisher.Flux
 import java.util.UUID
 import java.util.stream.Collectors
 
-
 @Repository("VoterPersistenceH2Adapter")
 class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContext) : FindVoterPort, RegisterVoterPort {
 
@@ -35,7 +34,7 @@ class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContex
     }
 
     fun findVotersByLastNameNIO(query: FindByLastNameQuery): Flux<Voter> {
-        //val connectionFactory: ConnectionFactory = ConnectionFactories.get("r2dbc:h2:~/VOTER;SCHEMA=VOTER")
+        // val connectionFactory: ConnectionFactory = ConnectionFactories.get("r2dbc:h2:~/VOTER;SCHEMA=VOTER")
         val connectionFactory = ConnectionFactories.get(ConnectionFactoryOptions.builder()
                 .option(DRIVER, "h2")
                 .option(PROTOCOL, "file")
