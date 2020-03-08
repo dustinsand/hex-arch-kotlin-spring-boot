@@ -4,9 +4,9 @@
 package com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables;
 
 
+import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.DefaultSchema;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Indexes;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Keys;
-import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Voter;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.records.FlywaySchemaHistoryRecord;
 
 import java.sql.Timestamp;
@@ -42,10 +42,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FlywaySchemaHistory extends TableImpl<FlywaySchemaHistoryRecord> {
 
-    private static final long serialVersionUID = -1237805699;
+    private static final long serialVersionUID = -877426796;
 
     /**
-     * The reference instance of <code>VOTER.flyway_schema_history</code>
+     * The reference instance of <code>flyway_schema_history</code>
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = new FlywaySchemaHistory();
 
@@ -58,71 +58,71 @@ public class FlywaySchemaHistory extends TableImpl<FlywaySchemaHistoryRecord> {
     }
 
     /**
-     * The column <code>VOTER.flyway_schema_history.installed_rank</code>.
+     * The column <code>flyway_schema_history.installed_rank</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, Integer> INSTALLED_RANK = createField(DSL.name("installed_rank"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.version</code>.
+     * The column <code>flyway_schema_history.version</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, String> VERSION = createField(DSL.name("version"), org.jooq.impl.SQLDataType.VARCHAR(50), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.description</code>.
+     * The column <code>flyway_schema_history.description</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.type</code>.
+     * The column <code>flyway_schema_history.type</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, String> TYPE = createField(DSL.name("type"), org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.script</code>.
+     * The column <code>flyway_schema_history.script</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, String> SCRIPT = createField(DSL.name("script"), org.jooq.impl.SQLDataType.VARCHAR(1000).nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.checksum</code>.
+     * The column <code>flyway_schema_history.checksum</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, Integer> CHECKSUM = createField(DSL.name("checksum"), org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.installed_by</code>.
+     * The column <code>flyway_schema_history.installed_by</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, String> INSTALLED_BY = createField(DSL.name("installed_by"), org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.installed_on</code>.
+     * The column <code>flyway_schema_history.installed_on</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, Timestamp> INSTALLED_ON = createField(DSL.name("installed_on"), org.jooq.impl.SQLDataType.TIMESTAMP.precision(6).nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.execution_time</code>.
+     * The column <code>flyway_schema_history.execution_time</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, Integer> EXECUTION_TIME = createField(DSL.name("execution_time"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.flyway_schema_history.success</code>.
+     * The column <code>flyway_schema_history.success</code>.
      */
     public final TableField<FlywaySchemaHistoryRecord, Boolean> SUCCESS = createField(DSL.name("success"), org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * Create a <code>VOTER.flyway_schema_history</code> table reference
+     * Create a <code>flyway_schema_history</code> table reference
      */
     public FlywaySchemaHistory() {
         this(DSL.name("flyway_schema_history"), null);
     }
 
     /**
-     * Create an aliased <code>VOTER.flyway_schema_history</code> table reference
+     * Create an aliased <code>flyway_schema_history</code> table reference
      */
     public FlywaySchemaHistory(String alias) {
         this(DSL.name(alias), FLYWAY_SCHEMA_HISTORY);
     }
 
     /**
-     * Create an aliased <code>VOTER.flyway_schema_history</code> table reference
+     * Create an aliased <code>flyway_schema_history</code> table reference
      */
     public FlywaySchemaHistory(Name alias) {
         this(alias, FLYWAY_SCHEMA_HISTORY);
@@ -142,7 +142,7 @@ public class FlywaySchemaHistory extends TableImpl<FlywaySchemaHistoryRecord> {
 
     @Override
     public Schema getSchema() {
-        return Voter.VOTER;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     @Override

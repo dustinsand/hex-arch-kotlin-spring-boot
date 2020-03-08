@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import reactor.test.StepVerifier
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [JooqApplication::class])
@@ -31,5 +32,25 @@ class VoterRepositoryIT {
 
         assertThat(voters).hasSize(2)
         assertThat(voters).extracting("firstName").contains("Dustin", "Sandy")
+    }
+
+    @Test
+    fun `should find voters by last name using NIO`() {
+        val voters = voterRepo.findVotersByLastNameNIO(FindVoterUseCase.FindByLastNameQuery("shimono"))
+
+        println("before")
+        voters.subscribe { v ->
+            println(v.firstName)
+        }
+        println("after")
+
+        Thread.sleep(100)
+//        StepVerifier.create(voters)
+//                .thenConsumeWhile { v ->
+//                    assertThat(v.firstName).isEqualTo()
+//                }
+//                .verifyComplete()
+//        assertThat(voters).hasSize(2)
+//        assertThat(voters).extracting("firstName").contains("Dustin", "Sandy")
     }
 }

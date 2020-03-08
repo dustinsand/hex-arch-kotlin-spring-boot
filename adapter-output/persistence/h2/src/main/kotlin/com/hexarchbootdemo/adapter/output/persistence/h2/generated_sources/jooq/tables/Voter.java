@@ -4,6 +4,7 @@
 package com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables;
 
 
+import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.DefaultSchema;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Indexes;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Keys;
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.records.VoterRecord;
@@ -41,12 +42,12 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Voter extends TableImpl<VoterRecord> {
 
-    private static final long serialVersionUID = -1474019174;
+    private static final long serialVersionUID = 206053229;
 
     /**
-     * The reference instance of <code>VOTER.VOTER</code>
+     * The reference instance of <code>VOTER</code>
      */
-    public static final Voter VOTER_ = new Voter();
+    public static final Voter VOTER = new Voter();
 
     /**
      * The class holding records for this type
@@ -57,39 +58,39 @@ public class Voter extends TableImpl<VoterRecord> {
     }
 
     /**
-     * The column <code>VOTER.VOTER.ID</code>.
+     * The column <code>VOTER.ID</code>.
      */
     public final TableField<VoterRecord, UUID> ID = createField(DSL.name("ID"), org.jooq.impl.SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.VOTER.FIRST_NAME</code>.
+     * The column <code>VOTER.FIRST_NAME</code>.
      */
     public final TableField<VoterRecord, String> FIRST_NAME = createField(DSL.name("FIRST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>VOTER.VOTER.LAST_NAME</code>.
+     * The column <code>VOTER.LAST_NAME</code>.
      */
     public final TableField<VoterRecord, String> LAST_NAME = createField(DSL.name("LAST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * Create a <code>VOTER.VOTER</code> table reference
+     * Create a <code>VOTER</code> table reference
      */
     public Voter() {
         this(DSL.name("VOTER"), null);
     }
 
     /**
-     * Create an aliased <code>VOTER.VOTER</code> table reference
+     * Create an aliased <code>VOTER</code> table reference
      */
     public Voter(String alias) {
-        this(DSL.name(alias), VOTER_);
+        this(DSL.name(alias), VOTER);
     }
 
     /**
-     * Create an aliased <code>VOTER.VOTER</code> table reference
+     * Create an aliased <code>VOTER</code> table reference
      */
     public Voter(Name alias) {
-        this(alias, VOTER_);
+        this(alias, VOTER);
     }
 
     private Voter(Name alias, Table<VoterRecord> aliased) {
@@ -101,12 +102,12 @@ public class Voter extends TableImpl<VoterRecord> {
     }
 
     public <O extends Record> Voter(Table<O> child, ForeignKey<O, VoterRecord> key) {
-        super(child, key, VOTER_);
+        super(child, key, VOTER);
     }
 
     @Override
     public Schema getSchema() {
-        return com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Voter.VOTER;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     @Override

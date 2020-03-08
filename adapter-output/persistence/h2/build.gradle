@@ -12,18 +12,24 @@ plugins {
 
 repositories {
     jcenter()
+    maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-//configurations {
-//    all*.exclude group: 'jakarta.xml.bind', module:'jakarta.xml.bind-api'
-//}
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot.experimental:spring-boot-bom-r2dbc:0.1.0.M3")
+    }
+}
 
 dependencies {
     implementation project(':voter-application-core')
     implementation 'org.flywaydb:flyway-core:6.2.4'
+    implementation 'io.r2dbc:r2dbc-h2'
     implementation 'org.jooq:jooq'
     implementation 'org.jooq:jooq-meta'
     implementation 'org.jooq:jooq-codegen'
+    implementation("org.springframework.boot.experimental:spring-boot-starter-data-r2dbc")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation ('org.springframework.boot:spring-boot-starter-jooq') {
         exclude group: "jakarta.xml.bind", module: "jakarta.xml.bind-api"
     }
@@ -33,6 +39,8 @@ dependencies {
     jooqRuntime 'com.h2database:h2:1.4.200'
     testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation("org.springframework.boot.experimental:spring-boot-test-autoconfigure-r2dbc")
+    testImplementation("io.projectreactor:reactor-test")
 }
 
 ext {
@@ -58,6 +66,8 @@ jooq {
                 inputSchema = h2Schema
                 includes = '.*'
                 excludes = ''
+                outputSchema = ''
+                outputSchemaToDefault = false
             }
             // Properties documentation: https://www.jooq.org/doc/3.11/manual/code-generation/codegen-advanced/
             generate {

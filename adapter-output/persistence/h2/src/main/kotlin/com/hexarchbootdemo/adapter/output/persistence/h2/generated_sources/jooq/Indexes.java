@@ -15,7 +15,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>VOTER</code> schema.
+ * A class modelling indexes of tables of the <code></code> schema.
  */
 @Generated(
     value = {
@@ -40,7 +40,7 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index PRIMARY_KEY_4 = Internal.createIndex("PRIMARY_KEY_4", Voter.VOTER_, new OrderField[] { Voter.VOTER_.ID }, true);
+        public static Index PRIMARY_KEY_4 = Internal.createIndex("PRIMARY_KEY_4", Voter.VOTER, new OrderField[] { Voter.VOTER.ID }, true);
         public static Index PRIMARY_KEY_6 = Internal.createIndex("PRIMARY_KEY_6", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, new OrderField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
         public static Index FLYWAY_SCHEMA_HISTORY_S_IDX = Internal.createIndex("flyway_schema_history_s_idx", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, new OrderField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.SUCCESS }, false);
     }

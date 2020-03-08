@@ -27,7 +27,7 @@ import org.jooq.impl.CatalogImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultCatalog extends CatalogImpl {
 
-    private static final long serialVersionUID = -2021351599;
+    private static final long serialVersionUID = 532436538;
 
     /**
      * The reference instance of <code></code>
@@ -35,9 +35,9 @@ public class DefaultCatalog extends CatalogImpl {
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
     /**
-     * The schema <code>VOTER</code>.
+     * The schema <code></code>.
      */
-    public final Voter VOTER = com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.Voter.VOTER;
+    public final DefaultSchema DEFAULT_SCHEMA = com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.DefaultSchema.DEFAULT_SCHEMA;
 
     /**
      * No further instances allowed
@@ -55,6 +55,6 @@ public class DefaultCatalog extends CatalogImpl {
 
     private final List<Schema> getSchemas0() {
         return Arrays.<Schema>asList(
-            Voter.VOTER);
+            DefaultSchema.DEFAULT_SCHEMA);
     }
 }

@@ -33,14 +33,14 @@ public class VoterDao extends DAOImpl<VoterRecord, com.hexarchbootdemo.adapter.o
      * Create a new VoterDao without any configuration
      */
     public VoterDao() {
-        super(Voter.VOTER_, com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter.class);
+        super(Voter.VOTER, com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter.class);
     }
 
     /**
      * Create a new VoterDao with an attached configuration
      */
     public VoterDao(Configuration configuration) {
-        super(Voter.VOTER_, com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter.class, configuration);
+        super(Voter.VOTER, com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter.class, configuration);
     }
 
     @Override
@@ -52,48 +52,48 @@ public class VoterDao extends DAOImpl<VoterRecord, com.hexarchbootdemo.adapter.o
      * Fetch records that have <code>ID BETWEEN lowerInclusive AND upperInclusive</code>
      */
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
-        return fetchRange(Voter.VOTER_.ID, lowerInclusive, upperInclusive);
+        return fetchRange(Voter.VOTER.ID, lowerInclusive, upperInclusive);
     }
 
     /**
      * Fetch records that have <code>ID IN (values)</code>
      */
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchById(UUID... values) {
-        return fetch(Voter.VOTER_.ID, values);
+        return fetch(Voter.VOTER.ID, values);
     }
 
     /**
      * Fetch a unique record that has <code>ID = value</code>
      */
     public com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter fetchOneById(UUID value) {
-        return fetchOne(Voter.VOTER_.ID, value);
+        return fetchOne(Voter.VOTER.ID, value);
     }
 
     /**
      * Fetch records that have <code>FIRST_NAME BETWEEN lowerInclusive AND upperInclusive</code>
      */
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchRangeOfFirstName(String lowerInclusive, String upperInclusive) {
-        return fetchRange(Voter.VOTER_.FIRST_NAME, lowerInclusive, upperInclusive);
+        return fetchRange(Voter.VOTER.FIRST_NAME, lowerInclusive, upperInclusive);
     }
 
     /**
      * Fetch records that have <code>FIRST_NAME IN (values)</code>
      */
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchByFirstName(String... values) {
-        return fetch(Voter.VOTER_.FIRST_NAME, values);
+        return fetch(Voter.VOTER.FIRST_NAME, values);
     }
 
     /**
      * Fetch records that have <code>LAST_NAME BETWEEN lowerInclusive AND upperInclusive</code>
      */
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchRangeOfLastName(String lowerInclusive, String upperInclusive) {
-        return fetchRange(Voter.VOTER_.LAST_NAME, lowerInclusive, upperInclusive);
+        return fetchRange(Voter.VOTER.LAST_NAME, lowerInclusive, upperInclusive);
     }
 
     /**
      * Fetch records that have <code>LAST_NAME IN (values)</code>
      */
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchByLastName(String... values) {
-        return fetch(Voter.VOTER_.LAST_NAME, values);
+        return fetch(Voter.VOTER.LAST_NAME, values);
     }
 }
