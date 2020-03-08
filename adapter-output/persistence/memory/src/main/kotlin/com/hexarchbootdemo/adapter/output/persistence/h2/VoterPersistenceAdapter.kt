@@ -8,6 +8,7 @@ import com.hexarchbootdemo.domain.model.Voter
 import java.util.UUID
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
 
 @Repository
 class VoterPersistenceAdapter : FindVoterPort, RegisterVoterPort {
@@ -25,5 +26,9 @@ class VoterPersistenceAdapter : FindVoterPort, RegisterVoterPort {
         val id = UUID.randomUUID()
         voterRepo.save(Voter(id, command.firstName, command.lastName))
         return id
+    }
+
+    override fun saveReactive(command: RegisterVoterUseCase.RegisterVoterCommand): Mono<UUID> {
+        TODO("Not yet implemented")
     }
 }

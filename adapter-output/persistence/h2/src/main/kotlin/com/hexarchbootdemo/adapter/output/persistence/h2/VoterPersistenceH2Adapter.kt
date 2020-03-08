@@ -2,27 +2,24 @@ package com.hexarchbootdemo.adapter.output.persistence.h2
 
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.Voter.VOTER
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNameQuery
-import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
+import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
 import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.Voter
-import io.r2dbc.spi.ConnectionFactories
-import io.r2dbc.spi.ConnectionFactoryOptions
-import io.r2dbc.spi.ConnectionFactoryOptions.DATABASE
-import io.r2dbc.spi.ConnectionFactoryOptions.DRIVER
-import io.r2dbc.spi.ConnectionFactoryOptions.PASSWORD
-import io.r2dbc.spi.ConnectionFactoryOptions.PROTOCOL
-import io.r2dbc.spi.ConnectionFactoryOptions.USER
 import org.jooq.DSLContext
+import org.jooq.conf.ParamType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.ReactiveTransactionManager
+import org.springframework.transaction.reactive.TransactionalOperator
 import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import java.util.UUID
 import java.util.stream.Collectors
 
 @Repository("VoterPersistenceH2Adapter")
-class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContext) : FindVoterPort, RegisterVoterPort {
+class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContext, val databaseClient: DatabaseClient) : FindVoterPort, RegisterVoterPort {
 
     override fun findVotersByLastName(query: FindByLastNameQuery): List<Voter> {
         return dslContext.select().from(VOTER)
@@ -33,21 +30,11 @@ class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContex
                 .collect(Collectors.toList())
     }
 
-    fun findVotersByLastNameNIO(query: FindByLastNameQuery): Flux<Voter> {
-        // val connectionFactory: ConnectionFactory = ConnectionFactories.get("r2dbc:h2:~/VOTER;SCHEMA=VOTER")
-        val connectionFactory = ConnectionFactories.get(ConnectionFactoryOptions.builder()
-                .option(DRIVER, "h2")
-                .option(PROTOCOL, "file")
-                .option(DATABASE, "~/VOTER")
-                .option(USER, "username")
-                .option(PASSWORD, "password")
-                .build())
-
-        val databaseClient = DatabaseClient.create(connectionFactory)
-
+    fun findVotersByLastNameReactive(query: FindByLastNameQuery): Flux<Voter> {
         return databaseClient.execute(
-                dslContext.select().from(VOTER)
-                        .where(VOTER.LAST_NAME.equalIgnoreCase(query.lastNameContains)).getSQL(true))
+                        dslContext.select().from(VOTER)
+                                .where(VOTER.LAST_NAME.equalIgnoreCase(query.lastNameContains))
+                                .getSQL(ParamType.INLINED))
                 .map { source, _ ->
                     Voter(source.get(VOTER.ID.name, VOTER.ID.type)!!,
                             source.get(VOTER.FIRST_NAME.name, VOTER.FIRST_NAME.type)!!,
@@ -56,12 +43,19 @@ class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: DSLContex
                 .all()
     }
 
-    override fun save(command: RegisterVoterUseCase.RegisterVoterCommand): UUID {
+    override fun save(command: RegisterVoterCommand): UUID {
+        throw NotImplementedError()
+    }
+
+    override fun saveReactive(command: RegisterVoterCommand): Mono<UUID> {
         // Assume validation logic of command performed here
 
-//        val id = UUID.randomUUID()
-//        voterRepo.save(Voter(id, command.firstName, command.lastName))
-//        return id
-        return UUID.randomUUID()
+        val id = UUID.randomUUID()
+        return databaseClient.execute(
+                dslContext.insertInto(VOTER, VOTER.ID, VOTER.FIRST_NAME, VOTER.LAST_NAME)
+                        .values(id, command.firstName, command.lastName)
+                        .getSQL(ParamType.INLINED))
+                .then()
+                .thenReturn(id)
     }
 }
