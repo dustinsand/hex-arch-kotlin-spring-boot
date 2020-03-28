@@ -1,5 +1,8 @@
 package com.hexarchbootdemo.adapter.output.rpc
 
+import org.valiktor.functions.isBetween
+import org.valiktor.validate
+
 // Example of a REST Gateway
 
 interface CreditRatingGateway {
@@ -8,9 +11,15 @@ interface CreditRatingGateway {
 
 class CreditReportGatewayExperian : CreditRatingGateway {
     override fun findByName(firstName: String, lastName: String): CreditReport {
-        // Picture a REST call was made to Experian
+        // Imagine a REST call was made to Experian
         return CreditReport(725)
     }
 }
 
-data class CreditReport(val fica: Int)
+data class CreditReport(val fica: Int) {
+    init {
+        validate(this) {
+            validate(CreditReport::fica).isBetween(start = 300, end = 850)
+        }
+    }
+}

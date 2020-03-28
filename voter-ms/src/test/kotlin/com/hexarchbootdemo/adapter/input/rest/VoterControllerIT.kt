@@ -25,7 +25,7 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
             .build()
 
     @Test
-    fun `Verify Voter first name is present in response`() {
+    fun `Verify Voter last name in response`() {
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
@@ -39,7 +39,7 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
     }
 
     @Test
-    fun `Verify Voter is saved`() {
+    fun `Verify valid Voter is saved`() {
         RestAssured.given()
                 .spec(requestSpec)
                 .given()
@@ -63,5 +63,20 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
                         "lastName", hasItems("Doe")
 
                 )
+    }
+
+    @Test
+    fun `Verify invalid Voter is not saved`() {
+        RestAssured.given()
+                .spec(requestSpec)
+                .given()
+                .contentType(ContentType.JSON)
+                .body("""
+                    { "firstName": "", "lastName": "" }
+                    """)
+                .`when`()
+                .post("/voters")
+                .then()
+                .statusCode(422)
     }
 }

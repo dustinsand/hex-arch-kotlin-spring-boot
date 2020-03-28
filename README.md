@@ -161,3 +161,4 @@ The references have great example diagrams to visually explain how the component
 * https://www.youtube.com/watch?v=cPH5AiqLQTo
 * https://leanpub.com/get-your-hands-dirty-on-clean-architecture
 * https://www.youtube.com/watch?v=SxJPQ5qXisw
+* [Goto 2018 - Modular Monoliths - Simon Brown](https://www.youtube.com/watch?v=5OjqD-ow8GE)

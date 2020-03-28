@@ -12,7 +12,6 @@ buildscript {
     }
     dependencies {
         classpath("org.jmailen.gradle:kotlinter-gradle:2.3.0")
-//        classpath("io.quarkus:quarkus-gradle-plugin:1.0.1.Final")
     }
 }
 
@@ -74,6 +73,7 @@ subprojects {
     val junitPlatformRunnerVersion: String by project
     val jacksonModuleKotlin: String by project
     val springBootVersion: String by project
+    val valiktorVersion: String by project
 
     apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
@@ -89,6 +89,8 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.valiktor:valiktor-spring-boot-starter:$valiktorVersion")
+        implementation("org.valiktor:valiktor-javatime:$valiktorVersion")
         testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
             exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
         }
