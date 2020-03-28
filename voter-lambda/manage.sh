@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function cmd_create() {
   echo Creating function
   aws lambda create-function \
