@@ -4,9 +4,9 @@ import com.hexarchbootdemo.domain.FIRST_NAME_MAX_LENGTH
 import com.hexarchbootdemo.domain.FIRST_NAME_MIN_LENGTH
 import com.hexarchbootdemo.domain.LAST_NAME_MAX_LENGTH
 import com.hexarchbootdemo.domain.LAST_NAME_MIN_LENGTH
+import java.util.UUID
 import org.valiktor.functions.hasSize
 import org.valiktor.validate
-import java.util.UUID
 
 interface RegisterVoterUseCase {
 
