@@ -1,14 +1,13 @@
 package com.hexarchbootdemo
 
 import com.hexarchbootdemo.common.archunit.InternalPackage
-import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
-import org.assertj.core.api.Assertions.assertThat
 import com.tngtech.archunit.core.importer.ClassFileImporter
+import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
 import java.io.IOException
 import java.util.stream.Collectors
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.reflections.Reflections
-
 
 /**
  * Evaluates [InternalPackage] annotations and checks that those packages are not accessed from the outside.

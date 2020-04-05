@@ -72,8 +72,6 @@ internal class HexagonalArchitectureTest {
                 .check(classes)
     }
 
-    
-
     private fun adapterParametersProvider(): List<Arguments> {
         return ADAPTER_SUBPACKAGES.map { Arguments.of(CLASSES, it) }
     }
