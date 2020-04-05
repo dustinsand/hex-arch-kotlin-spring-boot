@@ -4,6 +4,7 @@ import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
 import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
+import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
 import java.util.UUID
 import org.springframework.stereotype.Repository
@@ -23,9 +24,9 @@ internal class VoterRepository : FindVoterPort, RegisterVoterPort {
 
     init {
         // Init voter map
-        val voter1 = Voter(id = UUID.randomUUID(), firstName = "Dustin", lastName = "Shimono")
-        val voter2 = Voter(id = UUID.randomUUID(), firstName = "Sandy", lastName = "Shimono")
-        val voter3 = Voter(id = UUID.randomUUID(), firstName = "Tim", lastName = "Coocha")
+        val voter1 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("111-45-6789"), firstName = "Dustin", lastName = "Shimono")
+        val voter2 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("222-45-6789"), firstName = "Sandy", lastName = "Shimono")
+        val voter3 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("333-45-6789"), firstName = "Tim", lastName = "Coocha")
         databaseMap[voter1.id] = voter1
         databaseMap[voter2.id] = voter2
         databaseMap[voter3.id] = voter3
@@ -39,7 +40,7 @@ internal class VoterRepository : FindVoterPort, RegisterVoterPort {
         // Assume validation logic of command performed here
 
         val id = UUID.randomUUID()
-        save(Voter(id, command.firstName, command.lastName))
+        save(Voter(id, command.socialSecurityNumber, command.firstName, command.lastName))
         return id
     }
 

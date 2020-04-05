@@ -108,6 +108,7 @@ subprojects {
         testImplementation("org.junit.platform:junit-platform-runner:$junitPlatformRunnerVersion")
         testImplementation("org.assertj:assertj-core:$assertjVersion")
         testImplementation("org.reflections:reflections:$reflectionsVersion")
+        testImplementation("org.valiktor:valiktor-test:$valiktorVersion")
         implementation("com.h2database:h2:$h2Version")
     }
 }
