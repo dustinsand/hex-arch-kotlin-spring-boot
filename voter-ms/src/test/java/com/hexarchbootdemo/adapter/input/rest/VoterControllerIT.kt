@@ -1,6 +1,5 @@
 package com.hexarchbootdemo.adapter.input.rest
 
-import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
 import io.restassured.filter.log.RequestLoggingFilter
