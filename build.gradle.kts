@@ -16,7 +16,7 @@ buildscript {
 }
 
 plugins {
-    val kotlinVersion = "1.3.61"
+    val kotlinVersion = "1.3.71"
 
     base
     java
@@ -72,6 +72,7 @@ subprojects {
     val restAssuredVersion: String by project
     val junitPlatformRunnerVersion: String by project
     val jacksonModuleKotlin: String by project
+    val reflectionsVersion: String by project
     val springBootVersion: String by project
     val valiktorVersion: String by project
 
@@ -106,6 +107,8 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
         testImplementation("org.junit.platform:junit-platform-runner:$junitPlatformRunnerVersion")
         testImplementation("org.assertj:assertj-core:$assertjVersion")
+        testImplementation("org.reflections:reflections:$reflectionsVersion")
+        testImplementation("org.valiktor:valiktor-test:$valiktorVersion")
         implementation("com.h2database:h2:$h2Version")
     }
 }

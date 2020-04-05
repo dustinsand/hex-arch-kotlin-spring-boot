@@ -9,11 +9,13 @@ plugins {
 }
 
 dependencies {
+    val archunitVersion: String by project
     val quarkusPlatformGroupId: String by project
     val quarkusPlatformArtifactId: String by project
     val quarkusPlatformVersion: String by project
 
     implementation(project(":voter-application-core"))
+    implementation(project(":voter-common"))
     implementation(project(":adapter-output:persistence"))
     implementation("io.quarkus:quarkus-spring-boot-properties")
     implementation("io.quarkus:quarkus-spring-di")
@@ -27,6 +29,8 @@ dependencies {
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+    testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
+    testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:$archunitVersion")
 }
 
 tasks {
