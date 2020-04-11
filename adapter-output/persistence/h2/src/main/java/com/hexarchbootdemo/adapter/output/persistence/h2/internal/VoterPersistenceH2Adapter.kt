@@ -7,7 +7,6 @@ import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
-import kotlinx.coroutines.reactive.awaitFirst
 import org.jooq.DSLContext
 import org.jooq.conf.ParamType
 import org.springframework.beans.factory.annotation.Autowired

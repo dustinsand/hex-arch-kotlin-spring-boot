@@ -15,11 +15,9 @@ dependencies {
     val quarkusPlatformArtifactId: String by project
     val quarkusPlatformVersion: String by project
 
-    implementation(platform("org.springframework.boot.experimental:spring-boot-bom-r2dbc:0.1.0.M3"))
     implementation(project(":voter-application-core"))
     implementation(project(":voter-common"))
-    implementation(project(":adapter-output:persistence:h2"))
-    implementation("org.jooq:jooq")
+    implementation(project(":adapter-output:persistence:memory"))
     implementation("io.quarkus:quarkus-spring-boot-properties")
     implementation("io.quarkus:quarkus-spring-di")
     implementation("io.quarkus:quarkus-resteasy-jackson")
@@ -37,7 +35,6 @@ dependencies {
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
     testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
-    testImplementation("org.springframework.boot.experimental:spring-boot-test-autoconfigure-r2dbc")
     testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:$archunitVersion")
 }
 
@@ -48,8 +45,8 @@ tasks {
 }
 
 quarkus {
-    setSourceDir("$projectDir/src/main/java")
-    setOutputDirectory("$projectDir/build/classes/java/main")
+    setSourceDir("$projectDir/src/main/kotlin")
+    setOutputDirectory("$projectDir/build/classes/kotlin/main")
 }
 
 allOpen {

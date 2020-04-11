@@ -9,7 +9,6 @@ plugins {
 
 dependencies {
     val archunitVersion: String by project
-    val springBootVersion: String by project
 
     implementation(platform("org.springframework.boot.experimental:spring-boot-bom-r2dbc:0.1.0.M3"))
     implementation(project(":voter-application-core"))

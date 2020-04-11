@@ -5,7 +5,6 @@ import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNam
 import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.domain.model.Voter
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class FindVoterService(val findVoterRepository: FindVoterPort) : FindVoterUseCase {
