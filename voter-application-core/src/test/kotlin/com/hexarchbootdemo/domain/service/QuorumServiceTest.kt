@@ -1,5 +1,6 @@
 package com.hexarchbootdemo.domain.service
 
+import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
 import java.util.Collections
 import java.util.UUID
@@ -11,7 +12,7 @@ class QuorumServiceTest {
     fun hasQuorum() {
         val quorumService = QuorumService()
         assertThat(true).isEqualTo(quorumService.haveQuorum(
-                Collections.singletonList(Voter(firstName = "Adam", lastName = "West", id = UUID.randomUUID())), 1))
+                Collections.singletonList(Voter(firstName = "Adam", lastName = "West", id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("888-99-9999"))), 1))
     }
 
     @Test
@@ -19,6 +20,6 @@ class QuorumServiceTest {
         val quorumService = QuorumService()
         assertThat(false).isEqualTo(quorumService.haveQuorum(Collections.emptyList(), 10))
         assertThat(false).isEqualTo(quorumService.haveQuorum(
-                Collections.singletonList(Voter(firstName = "Eve", lastName = "West", id = UUID.randomUUID())), 2))
+                Collections.singletonList(Voter(firstName = "Eve", lastName = "West", id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("999-99-9999"))), 2))
     }
 }

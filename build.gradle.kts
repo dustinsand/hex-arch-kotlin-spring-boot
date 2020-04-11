@@ -16,7 +16,7 @@ buildscript {
 }
 
 plugins {
-    val kotlinVersion = "1.3.61"
+    val kotlinVersion = "1.3.71"
 
     base
     java
@@ -72,7 +72,9 @@ subprojects {
     val restAssuredVersion: String by project
     val junitPlatformRunnerVersion: String by project
     val jacksonModuleKotlin: String by project
+    val reflectionsVersion: String by project
     val springBootVersion: String by project
+    val valiktorVersion: String by project
 
     apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
@@ -81,6 +83,7 @@ subprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven(url = "https://repo.spring.io/milestone")
     }
 
     // TODO move dependencies to where actually used in subproject
@@ -90,6 +93,8 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.valiktor:valiktor-spring-boot-starter:$valiktorVersion")
+        implementation("org.valiktor:valiktor-javatime:$valiktorVersion")
         testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
             exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
         }
@@ -105,6 +110,8 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
         testImplementation("org.junit.platform:junit-platform-runner:$junitPlatformRunnerVersion")
         testImplementation("org.assertj:assertj-core:$assertjVersion")
+        testImplementation("org.reflections:reflections:$reflectionsVersion")
+        testImplementation("org.valiktor:valiktor-test:$valiktorVersion")
         implementation("com.h2database:h2:$h2Version")
     }
 }

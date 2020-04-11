@@ -27,6 +27,7 @@ This project is used to show how the hexagonal architecture can be applied to a 
 * Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
 * Modular. Minimizes tangled dependencies by decoupling the business logic from the technical code. Reduces the friction of extracting core domain objects to another context. Sometimes it makes design sense to start as more of a monolith and extract later to another context when there are strong reasons to do so.
 * Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
+* Architecture is enforceable using tests so it remains clean over time as old and new developers work on the code base.
 * [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882). You will see influences from Clean code in the design. 
 
 # How it works
@@ -40,7 +41,7 @@ Outer layers depend on inner layers. Inner layers expose interfaces that outer l
 ![lambda diagram](https://user-images.githubusercontent.com/5289/74338279-de080e80-4d6f-11ea-9924-0968a11976e6.png)
 
 # Gradle Multi-Module Project
-Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.
+Used Gradle's multi-module capability to demonstrate how a hexagonal project could be modularized.  The modules are 99.9% in Kotlin, but there are edge cases when Java is required so you will find Kotlin and Java classes mixed together in the same src directory. I chose src/main/java and src/test/java for both the Kotlin and Java source files. 
 ## Modules
 ### voter-application-core
 The inner hexagon. See definition in 'How it works'
@@ -136,7 +137,11 @@ The application layer is more appropriate for integration testing and the domain
 
 # Enforcing the Architecture
 
-The architecture is at risk of eroding over time if boundaries between layers are not maintained. [ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing the  given Java bytecode, importing all classes into a Java code structure. ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/kotlin/.../HexagonalArchitectureTest.kt for the rules checked.  
+The architecture is at risk of eroding over time if boundaries between layers are not maintained. [ArchUnit](https://www.archunit.org/) is used to check if the code follows the architecture. ArchUnit does so by analyzing the  given Java bytecode, importing all classes into a Java code structure.
+
+Kotlin added the keyword modifier, internal, to enforce component boundaries and overcome the weakness of package-private in Java. I liked the idea in the reference, Clean Boundaries, to be explicit and put "internal" classes in a package named internal which could then be enforced by ArchUnit. However, Kotlin doesn't support Package annotations so you will see the InternalPackage annotation is written in Java and the package-info.java in the "internal" packages are also in Java. I'm experimenting if this is a good idea or not with Kotlin because it does seem redundant since Kotlin has the internal modifier. However, I like that I can test for any class in an "internal" package is not used inappropriately (developers can still forget to use the internal modifier) and it guides the developer to use the dependency inversion principle. 
+
+ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/java/.../HexagonalArchitectureTest.kt and InternalPackageTest.kt for the rules checked.  
 
 # TL;DR Show me a diagram
 
@@ -145,19 +150,21 @@ The references have great example diagrams to visually explain how the component
 ![herbertograca_hex_diagram](https://user-images.githubusercontent.com/5289/50517936-e70d2200-0a80-11e9-9382-d124912c27f3.png)
 
 # References
-* http://wiki.c2.com/?HexagonalArchitecture
-* http://domainlanguage.com/ddd/
-* http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html
-* https://www.youtube.com/watch?v=0wAvVcrbVK4&t=1513s 
-* https://github.com/lievendoclo/devoxx-2017
-* https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/
-* http://fideloper.com/hexagonal-architecture
-* https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html
-* https://dzone.com/articles/hexagonal-architecture-is-powerful
-* https://www.culttt.com/2014/12/31/hexagonal-architecture/
-* https://skillsmatter.com/skillscasts/5744-decoupling-from-asp-net-hexagonal-architectures-in-net
-* https://beyondxscratch.com/2017/08/19/decoupling-your-technical-code-from-your-business-logic-with-the-hexagonal-architecture-hexarch/
-* https://softwarecampament.wordpress.com/portsadapters/
-* https://www.youtube.com/watch?v=cPH5AiqLQTo
-* https://leanpub.com/get-your-hands-dirty-on-clean-architecture
-* https://www.youtube.com/watch?v=SxJPQ5qXisw
+* [Hexagonal Architecture - Alistair Cockburn](http://wiki.c2.com/?HexagonalArchitecture)
+* [Domain Language - DDD](http://domainlanguage.com/ddd/)
+* [Patterns, Principles, and Practices of Domain-Driven Design](http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html)
+* [Using Kotlin to implement Clean Architecture by Lieven Doclo](https://www.youtube.com/watch?v=0wAvVcrbVK4&t=1513s) 
+* [Code from Devoxx Belgium 2017 presentation](https://github.com/lievendoclo/devoxx-2017)
+* [DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/)
+* [Hexagonal Architecture - Chris Fidao](http://fideloper.com/hexagonal-architecture)
+* [The Clean Architecture - Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
+* [Hexagonal Architecture Is Powerful](https://dzone.com/articles/hexagonal-architecture-is-powerful)
+* [What is Hexagonal Architecture?](https://www.culttt.com/2014/12/31/hexagonal-architecture/)
+* [Decoupling from ASP.NET - Hexagonal Architectures in .NET](https://skillsmatter.com/skillscasts/5744-decoupling-from-asp-net-hexagonal-architectures-in-net)
+* [Hexagonal Architecture 101: Decoupling your technical code from your business logic (HexArch)](https://beyondxscratch.com/2017/08/19/decoupling-your-technical-code-from-your-business-logic-with-the-hexagonal-architecture-hexarch/)
+* [https://jmgarridopaz.github.io/content/hexagonalarchitecture.html](https://jmgarridopaz.github.io/content/hexagonalarchitecture.html)
+* [Clean Architecture with Spring by Tom Hombergs @ Spring I/O 2019](https://www.youtube.com/watch?v=cPH5AiqLQTo)
+* [Get Your Hands Dirty on Clean Architecture](https://leanpub.com/get-your-hands-dirty-on-clean-architecture)
+* [DevTernity 2019: Ian Cooper – The Clean Architecture](https://www.youtube.com/watch?v=SxJPQ5qXisw)
+* [Goto 2018 - Modular Monoliths - Simon Brown](https://www.youtube.com/watch?v=5OjqD-ow8GE)
+* [Clean Boundaries - Tom Hombergs](https://reflectoring.io/java-components-clean-boundaries/)

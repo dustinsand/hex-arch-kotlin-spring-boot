@@ -1,2 +1,2 @@
-insert into voter (id, first_name, last_name) values (random_uuid(), 'Dustin', 'Shimono');
-insert into voter (id, first_name, last_name) values (random_uuid(), 'Sandy', 'Shimono');
+insert into voter (id, first_name, last_name, social_security_number) values (random_uuid(), 'Dustin', 'Shimono', '111-11-1111');
+insert into voter (id, first_name, last_name, social_security_number) values (random_uuid(), 'Sandy', 'Shimono', '222-22-2222');

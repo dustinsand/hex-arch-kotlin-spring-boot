@@ -1,8 +1,10 @@
 package com.hexarchbootdemo.adapter.output.persistence.h2
 
 import com.hexarchbootdemo.JooqApplication
+import com.hexarchbootdemo.adapter.output.persistence.h2.internal.VoterPersistenceH2Adapter
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
+import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import org.assertj.core.api.Assertions.assertThat
 import org.flywaydb.core.Flyway
 import org.junit.jupiter.api.BeforeEach
@@ -58,7 +60,7 @@ class VoterRepositoryIT {
 
     @Test
     fun `should save new voter`() {
-        val voterIdMono = voterRepo.saveReactive(RegisterVoterCommand("Joe", "Reactive"))
+        val voterIdMono = voterRepo.saveReactive(RegisterVoterCommand(SocialSecurityNumber("555-55-5555"), "Joe", "Reactive"))
 
         StepVerifier.create(voterIdMono)
                 .assertNext {
@@ -73,6 +75,7 @@ class VoterRepositoryIT {
                     assertThat(it.id).isNotNull()
                     assertThat(it.firstName).isEqualTo("Joe")
                     assertThat(it.lastName).isEqualTo("Reactive")
+                    assertThat(it.socialSecurityNumber.toString()).isEqualTo("555-55-5555")
                 }
                 .verifyComplete()
 

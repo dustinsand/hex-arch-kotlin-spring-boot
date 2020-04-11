@@ -7,4 +7,5 @@ plugins {
 
 dependencies {
     implementation(project(":voter-application-core"))
+    implementation(project(":voter-common"))
 }

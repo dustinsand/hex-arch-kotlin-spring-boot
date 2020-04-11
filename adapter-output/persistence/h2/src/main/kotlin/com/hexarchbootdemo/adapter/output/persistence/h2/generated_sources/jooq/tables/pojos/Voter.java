@@ -23,26 +23,30 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Voter implements Serializable {
 
-    private static final long serialVersionUID = 1338693828;
+    private static final long serialVersionUID = -1720521003;
 
     private final UUID   id;
     private final String firstName;
     private final String lastName;
+    private final String socialSecurityNumber;
 
     public Voter(Voter value) {
         this.id = value.id;
         this.firstName = value.firstName;
         this.lastName = value.lastName;
+        this.socialSecurityNumber = value.socialSecurityNumber;
     }
 
     public Voter(
         UUID   id,
         String firstName,
-        String lastName
+        String lastName,
+        String socialSecurityNumber
     ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.socialSecurityNumber = socialSecurityNumber;
     }
 
     public UUID getId() {
@@ -57,6 +61,10 @@ public class Voter implements Serializable {
         return this.lastName;
     }
 
+    public String getSocialSecurityNumber() {
+        return this.socialSecurityNumber;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Voter (");
@@ -64,6 +72,7 @@ public class Voter implements Serializable {
         sb.append(id);
         sb.append(", ").append(firstName);
         sb.append(", ").append(lastName);
+        sb.append(", ").append(socialSecurityNumber);
 
         sb.append(")");
         return sb.toString();

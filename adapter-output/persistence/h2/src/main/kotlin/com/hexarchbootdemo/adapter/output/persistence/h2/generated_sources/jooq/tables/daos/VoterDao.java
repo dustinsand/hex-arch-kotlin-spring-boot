@@ -96,4 +96,18 @@ public class VoterDao extends DAOImpl<VoterRecord, com.hexarchbootdemo.adapter.o
     public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchByLastName(String... values) {
         return fetch(Voter.VOTER.LAST_NAME, values);
     }
+
+    /**
+     * Fetch records that have <code>SOCIAL_SECURITY_NUMBER BETWEEN lowerInclusive AND upperInclusive</code>
+     */
+    public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchRangeOfSocialSecurityNumber(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Voter.VOTER.SOCIAL_SECURITY_NUMBER, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>SOCIAL_SECURITY_NUMBER IN (values)</code>
+     */
+    public List<com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.pojos.Voter> fetchBySocialSecurityNumber(String... values) {
+        return fetch(Voter.VOTER.SOCIAL_SECURITY_NUMBER, values);
+    }
 }

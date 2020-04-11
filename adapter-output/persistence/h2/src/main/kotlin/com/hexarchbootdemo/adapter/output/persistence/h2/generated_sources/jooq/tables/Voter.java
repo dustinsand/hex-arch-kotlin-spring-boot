@@ -20,7 +20,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Voter extends TableImpl<VoterRecord> {
 
-    private static final long serialVersionUID = 206053229;
+    private static final long serialVersionUID = -1111007655;
 
     /**
      * The reference instance of <code>VOTER</code>
@@ -71,6 +71,11 @@ public class Voter extends TableImpl<VoterRecord> {
      * The column <code>VOTER.LAST_NAME</code>.
      */
     public final TableField<VoterRecord, String> LAST_NAME = createField(DSL.name("LAST_NAME"), org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>VOTER.SOCIAL_SECURITY_NUMBER</code>.
+     */
+    public final TableField<VoterRecord, String> SOCIAL_SECURITY_NUMBER = createField(DSL.name("SOCIAL_SECURITY_NUMBER"), org.jooq.impl.SQLDataType.VARCHAR(11).nullable(false), this, "");
 
     /**
      * Create a <code>VOTER</code> table reference
@@ -152,11 +157,11 @@ public class Voter extends TableImpl<VoterRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<UUID, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<UUID, String, String, String> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

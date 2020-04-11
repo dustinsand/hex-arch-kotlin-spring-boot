@@ -10,11 +10,6 @@ plugins {
     id "org.jetbrains.kotlin.plugin.spring"
 }
 
-repositories {
-    jcenter()
-    maven { url = uri("https://repo.spring.io/milestone") }
-}
-
 dependencyManagement {
     imports {
         mavenBom("org.springframework.boot.experimental:spring-boot-bom-r2dbc:0.1.0.M3")
