@@ -5,7 +5,8 @@ plugins {
     kotlin("plugin.spring")
     kotlin("plugin.allopen")
 
-    id("io.quarkus") version "1.2.0.Final"
+    id("io.quarkus") version "1.2.1.Final"
+    id("nu.studer.jooq") version "4.1"
 }
 
 dependencies {
@@ -16,16 +17,20 @@ dependencies {
 
     implementation(project(":voter-application-core"))
     implementation(project(":voter-common"))
-    implementation(project(":adapter-output:persistence"))
+    implementation(project(":adapter-output:persistence:memory"))
     implementation("io.quarkus:quarkus-spring-boot-properties")
     implementation("io.quarkus:quarkus-spring-di")
     implementation("io.quarkus:quarkus-resteasy-jackson")
     implementation("io.quarkus:quarkus-jackson")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-amazon-lambda")
+    implementation("io.quarkus:quarkus-jdbc-h2")
+    implementation("io.quarkus:quarkus-agroal")
+    implementation("io.quarkus:quarkus-flyway")
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-resteasy")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.3")
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")

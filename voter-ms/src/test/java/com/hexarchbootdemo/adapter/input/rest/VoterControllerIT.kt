@@ -34,7 +34,7 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
                 .statusCode(200)
                 .body("firstInitial", hasItems("D"),
                         "lastName", hasItems("Shimono"),
-                        "socialSecurityNumber", hasItems("111-45-6789", "222-45-6789")
+                        "socialSecurityNumber", hasItems("111-11-1111", "222-22-2222")
 
                 )
     }

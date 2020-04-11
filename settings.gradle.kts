@@ -20,4 +20,5 @@ include(
         "voter-ms",
         "voter-lambda",
         "voter-application-core",
-        "adapter-output:persistence")
+        "adapter-output:persistence:memory",
+        "adapter-output:persistence:h2")

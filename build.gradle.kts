@@ -20,7 +20,7 @@ plugins {
 
     base
     java
-    id("org.springframework.boot") version "2.2.4.RELEASE"
+    id("org.springframework.boot") version "2.2.4.RELEASE" apply false
     id("com.github.ben-manes.versions") version "0.27.0"
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.spring") version kotlinVersion apply false
@@ -83,7 +83,10 @@ subprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven(url = "https://repo.spring.io/milestone")
     }
+
+    // TODO move dependencies to where actually used in subproject
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
