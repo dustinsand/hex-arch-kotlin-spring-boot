@@ -7,13 +7,12 @@ import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
+import kotlinx.coroutines.reactive.awaitFirst
 import org.jooq.DSLContext
 import org.jooq.conf.ParamType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Repository
-import org.springframework.transaction.ReactiveTransactionManager
-import org.springframework.transaction.reactive.TransactionalOperator
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.util.UUID
@@ -51,7 +50,11 @@ internal class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: 
     }
 
     override fun save(command: RegisterVoterCommand): UUID {
-        throw NotImplementedError()
+        val id = UUID.randomUUID()
+        dslContext.insertInto(VOTER).columns(VOTER.ID, VOTER.SOCIAL_SECURITY_NUMBER, VOTER.FIRST_NAME, VOTER.LAST_NAME)
+                .values(id, command.socialSecurityNumber.toString(), command.firstName, command.lastName)
+                .execute()
+        return id
     }
 
     override fun saveReactive(command: RegisterVoterCommand): Mono<UUID> {

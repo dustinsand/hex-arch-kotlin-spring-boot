@@ -6,5 +6,4 @@ plugins {
 }
 
 dependencies {
-    testImplementation(project(":voter-ms"))
 }

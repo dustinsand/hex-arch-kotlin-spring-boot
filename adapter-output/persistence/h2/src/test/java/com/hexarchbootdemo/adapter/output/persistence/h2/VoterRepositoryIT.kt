@@ -1,6 +1,5 @@
 package com.hexarchbootdemo.adapter.output.persistence.h2
 
-import com.hexarchbootdemo.JooqApplication
 import com.hexarchbootdemo.adapter.output.persistence.h2.internal.VoterPersistenceH2Adapter
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
@@ -17,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import reactor.test.StepVerifier
 
 @ExtendWith(SpringExtension::class)
-@SpringBootTest(classes = [JooqApplication::class])
+@SpringBootTest(classes = [JooqTestApplication::class])
 class VoterRepositoryIT {
     @Autowired
     lateinit var flyway: Flyway
@@ -78,6 +77,5 @@ class VoterRepositoryIT {
                     assertThat(it.socialSecurityNumber.toString()).isEqualTo("555-55-5555")
                 }
                 .verifyComplete()
-
     }
 }

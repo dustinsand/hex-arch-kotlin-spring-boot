@@ -75,7 +75,7 @@ jooq {
             }
             target {
                 packageName = 'com.hexarchbootdemo.adapter.output.persistence.h2.generated-sources.jooq'
-                directory = 'src/main/kotlin'
+                directory = 'src/main/java'
             }
         }
     }

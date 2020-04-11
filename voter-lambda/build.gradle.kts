@@ -48,8 +48,8 @@ tasks {
 }
 
 quarkus {
-    setSourceDir("$projectDir/src/main/kotlin")
-    setOutputDirectory("$projectDir/build/classes/kotlin/main")
+    setSourceDir("$projectDir/src/main/java")
+    setOutputDirectory("$projectDir/build/classes/java/main")
 }
 
 allOpen {

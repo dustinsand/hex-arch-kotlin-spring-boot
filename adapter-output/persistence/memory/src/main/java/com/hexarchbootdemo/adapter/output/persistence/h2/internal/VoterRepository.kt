@@ -25,9 +25,9 @@ internal class VoterRepository : FindVoterPort, RegisterVoterPort {
 
     init {
         // Init voter map
-        val voter1 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("111-45-6789"), firstName = "Dustin", lastName = "Shimono")
-        val voter2 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("222-45-6789"), firstName = "Sandy", lastName = "Shimono")
-        val voter3 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("333-45-6789"), firstName = "Tim", lastName = "Coocha")
+        val voter1 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("111-11-1111"), firstName = "Dustin", lastName = "Shimono")
+        val voter2 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("222-22-2222"), firstName = "Sandy", lastName = "Shimono")
+        val voter3 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("333-33-3333"), firstName = "Tim", lastName = "Coocha")
         databaseMap[voter1.id] = voter1
         databaseMap[voter2.id] = voter2
         databaseMap[voter3.id] = voter3

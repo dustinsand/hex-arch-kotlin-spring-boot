@@ -10,9 +10,13 @@ import org.hamcrest.CoreMatchers.hasItems
 import org.hamcrest.CoreMatchers.startsWith
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.transaction.TransactionManager
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -34,7 +38,7 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
                 .statusCode(200)
                 .body("firstInitial", hasItems("D"),
                         "lastName", hasItems("Shimono"),
-                        "socialSecurityNumber", hasItems("111-45-6789", "222-45-6789")
+                        "socialSecurityNumber", hasItems("111-11-1111", "222-22-2222")
 
                 )
     }
