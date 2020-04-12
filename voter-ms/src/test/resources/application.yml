@@ -1,7 +1,8 @@
 logging:
   level:
     root: INFO
-    org.jooq: TRACE
+    org.jooq: DEBUG
+    io.r2dbc: DEBUG
 
 spring.datasource:
   driver-class-name: org.h2.Driver
