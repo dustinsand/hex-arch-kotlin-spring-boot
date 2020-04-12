@@ -8,19 +8,13 @@ import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.reactive.asFlow
-import kotlinx.coroutines.reactive.awaitFirst
-import kotlinx.coroutines.reactor.mono
 import org.jooq.DSLContext
 import org.jooq.conf.ParamType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.core.await
-import org.springframework.data.r2dbc.core.awaitFirst
 import org.springframework.stereotype.Repository
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 import java.util.UUID
 import java.util.stream.Collectors
 

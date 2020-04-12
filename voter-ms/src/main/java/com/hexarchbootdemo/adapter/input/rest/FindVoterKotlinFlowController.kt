@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class FindVoterKotlinFlowController(
-        private val findVotersUseCase: FindVoterUseCase) {
+    private val findVotersUseCase: FindVoterUseCase
+) {
 
     @GetMapping("kotlin-reactive-flow/voters")
     suspend fun findVoters(@RequestParam lastName: String): Flow<VoterJson> {

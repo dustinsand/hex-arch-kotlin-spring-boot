@@ -20,7 +20,7 @@ import java.net.URI
 
 @RestController
 class RegisterVoterController(
-        private val registerVoterUseCase: RegisterVoterUseCase
+    private val registerVoterUseCase: RegisterVoterUseCase
 ) {
 
     @PostMapping("/voters")

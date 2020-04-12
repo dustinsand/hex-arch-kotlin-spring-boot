@@ -20,7 +20,7 @@ import java.net.URI
 
 @RestController
 class RegisterVoterKotlinFlowController(
-        private val registerVoterUseCase: RegisterVoterUseCase
+    private val registerVoterUseCase: RegisterVoterUseCase
 ) {
 
     @PostMapping("kotlin-reactive-flow/voters")

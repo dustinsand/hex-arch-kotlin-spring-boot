@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono.just
 
 @RestController
 class FindVoterController(
-        private val findVotersUseCase: FindVoterUseCase
+    private val findVotersUseCase: FindVoterUseCase
 ) {
     @GetMapping("/voters")
     fun findVoters(@RequestParam lastName: String): Mono<List<VoterJson>> {

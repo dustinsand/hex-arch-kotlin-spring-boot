@@ -9,7 +9,6 @@ import com.hexarchbootdemo.domain.model.Voter
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 import org.springframework.stereotype.Repository
-import reactor.core.publisher.Mono
 
 /**
  * An actual database was not used intentionally to minimize the complexity of this project so concepts of architecture were clearer.
