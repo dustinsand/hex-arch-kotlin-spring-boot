@@ -4,6 +4,8 @@ import com.hexarchbootdemo.adapter.output.persistence.h2.internal.VoterPersisten
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.flywaydb.core.Flyway
 import org.junit.jupiter.api.BeforeEach
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import reactor.test.StepVerifier
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [JooqTestApplication::class])
@@ -41,41 +42,38 @@ class VoterRepositoryIT {
 
     @Test
     fun `should find voters by last name using Reactive driver`() {
-        val votersFlux = voterRepo.findVotersByLastNameReactive(FindVoterUseCase.FindByLastNameQuery("shimono"))
+        runBlockingTest {
+            val voters = voterRepo.findVotersByLastNameReactive(
+                    FindVoterUseCase.FindByLastNameQuery("shimono")).toList(mutableListOf())
 
-        StepVerifier.create(votersFlux)
-                .assertNext {
-                    assertThat(it.id).isNotNull()
-                    assertThat(it.firstName).isEqualTo("Dustin")
-                    assertThat(it.lastName).isEqualTo("Shimono")
-                }
-                .assertNext {
-                    assertThat(it.id).isNotNull()
-                    assertThat(it.firstName).isEqualTo("Sandy")
-                    assertThat(it.lastName).isEqualTo("Shimono")
-                }
-                .verifyComplete()
+            assertThat(voters.size).isEqualTo(2)
+
+            assertThat(voters[0].id).isNotNull()
+            assertThat(voters[0].firstName).isEqualTo("Dustin")
+            assertThat(voters[0].lastName).isEqualTo("Shimono")
+            assertThat(voters[0].socialSecurityNumber.toString()).isEqualTo("111-11-1111")
+
+            assertThat(voters[1].id).isNotNull()
+            assertThat(voters[1].firstName).isEqualTo("Sandy")
+            assertThat(voters[1].lastName).isEqualTo("Shimono")
+            assertThat(voters[1].socialSecurityNumber.toString()).isEqualTo("222-22-2222")
+        }
     }
 
     @Test
     fun `should save new voter`() {
-        val voterIdMono = voterRepo.saveReactive(RegisterVoterCommand(SocialSecurityNumber("555-55-5555"), "Joe", "Reactive"))
+        runBlockingTest {
+            val voterId = voterRepo.saveReactive(RegisterVoterCommand(SocialSecurityNumber("555-55-5555"), "Joe", "Reactive"))
+            assertThat(voterId).isNotNull()
 
-        StepVerifier.create(voterIdMono)
-                .assertNext {
-                    assertThat(it).isNotNull()
-                }
-                .verifyComplete()
+            val voters = voterRepo.findVotersByLastNameReactive(
+                    FindVoterUseCase.FindByLastNameQuery("Reactive")).toList(mutableListOf())
 
-        val votersFlux = voterRepo.findVotersByLastNameReactive(FindVoterUseCase.FindByLastNameQuery("Reactive"))
-
-        StepVerifier.create(votersFlux)
-                .assertNext {
-                    assertThat(it.id).isNotNull()
-                    assertThat(it.firstName).isEqualTo("Joe")
-                    assertThat(it.lastName).isEqualTo("Reactive")
-                    assertThat(it.socialSecurityNumber.toString()).isEqualTo("555-55-5555")
-                }
-                .verifyComplete()
+            assertThat(voters.size).isEqualTo(1)
+            assertThat(voters[0].id).isEqualTo(voterId)
+            assertThat(voters[0].firstName).isEqualTo("Joe")
+            assertThat(voters[0].lastName).isEqualTo("Reactive")
+            assertThat(voters[0].socialSecurityNumber.toString()).isEqualTo("555-55-5555")
+        }
     }
 }

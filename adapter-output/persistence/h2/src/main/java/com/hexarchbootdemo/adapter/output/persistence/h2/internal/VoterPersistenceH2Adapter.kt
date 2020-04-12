@@ -7,10 +7,17 @@ import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.reactive.awaitFirst
+import kotlinx.coroutines.reactor.mono
 import org.jooq.DSLContext
 import org.jooq.conf.ParamType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.r2dbc.core.DatabaseClient
+import org.springframework.data.r2dbc.core.await
+import org.springframework.data.r2dbc.core.awaitFirst
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -25,19 +32,21 @@ internal class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: 
                 .where(VOTER.LAST_NAME.equalIgnoreCase(query.lastNameContains))
                 .fetch()
                 .stream()
-                .map { Voter(
-                        id = it.getValue(VOTER.ID),
-                        socialSecurityNumber = SocialSecurityNumber(it.getValue(VOTER.SOCIAL_SECURITY_NUMBER)),
-                        firstName = it.getValue(VOTER.FIRST_NAME),
-                        lastName = it.getValue(VOTER.LAST_NAME)) }
+                .map {
+                    Voter(
+                            id = it.getValue(VOTER.ID),
+                            socialSecurityNumber = SocialSecurityNumber(it.getValue(VOTER.SOCIAL_SECURITY_NUMBER)),
+                            firstName = it.getValue(VOTER.FIRST_NAME),
+                            lastName = it.getValue(VOTER.LAST_NAME))
+                }
                 .collect(Collectors.toList())
     }
 
-    fun findVotersByLastNameReactive(query: FindByLastNameQuery): Flux<Voter> {
+    override suspend fun findVotersByLastNameReactive(query: FindByLastNameQuery): Flow<Voter> {
         return databaseClient.execute(
-                        dslContext.select().from(VOTER)
-                                .where(VOTER.LAST_NAME.equalIgnoreCase(query.lastNameContains))
-                                .getSQL(ParamType.INLINED))
+                dslContext.select().from(VOTER)
+                        .where(VOTER.LAST_NAME.equalIgnoreCase(query.lastNameContains))
+                        .getSQL(ParamType.INLINED))
                 .map { source, _ ->
                     Voter(id = source.get(VOTER.ID.name, VOTER.ID.type)!!,
                             socialSecurityNumber =
@@ -46,6 +55,7 @@ internal class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: 
                             lastName = source.get(VOTER.LAST_NAME.name, VOTER.LAST_NAME.type)!!)
                 }
                 .all()
+                .asFlow()
     }
 
     override fun save(command: RegisterVoterCommand): UUID {
@@ -56,15 +66,16 @@ internal class VoterPersistenceH2Adapter @Autowired constructor(val dslContext: 
         return id
     }
 
-    override fun saveReactive(command: RegisterVoterCommand): Mono<UUID> {
+    override suspend fun saveReactive(command: RegisterVoterCommand): UUID {
         // Assume validation logic of command performed here
 
         val id = UUID.randomUUID()
-        return databaseClient.execute(
+        databaseClient.execute(
                 dslContext.insertInto(VOTER, VOTER.ID, VOTER.SOCIAL_SECURITY_NUMBER, VOTER.FIRST_NAME, VOTER.LAST_NAME)
                         .values(id, command.socialSecurityNumber.toString(), command.firstName, command.lastName)
                         .getSQL(ParamType.INLINED))
-                .then()
-                .thenReturn(id)
+                .await()
+
+        return id
     }
 }

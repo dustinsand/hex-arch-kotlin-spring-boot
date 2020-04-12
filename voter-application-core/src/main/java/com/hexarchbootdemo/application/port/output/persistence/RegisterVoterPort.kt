@@ -6,5 +6,5 @@ import java.util.UUID
 
 interface RegisterVoterPort {
     fun save(command: RegisterVoterCommand): UUID
-    fun saveReactive(command: RegisterVoterCommand): Mono<UUID>
+    suspend fun saveReactive(command: RegisterVoterCommand): UUID
 }

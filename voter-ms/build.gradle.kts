@@ -15,7 +15,6 @@ dependencies {
     implementation(project(":voter-common"))
     implementation(project(":adapter-output:persistence:h2"))
     implementation("org.jooq:jooq")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.3")
 
     testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
     testImplementation("org.springframework.boot.experimental:spring-boot-test-autoconfigure-r2dbc")

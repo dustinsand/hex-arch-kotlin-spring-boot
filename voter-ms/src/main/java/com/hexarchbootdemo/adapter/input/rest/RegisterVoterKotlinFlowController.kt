@@ -19,16 +19,17 @@ import org.valiktor.validate
 import java.net.URI
 
 @RestController
-class RegisterVoterController(
+class RegisterVoterKotlinFlowController(
         private val registerVoterUseCase: RegisterVoterUseCase
 ) {
 
-    @PostMapping("/voters")
-    fun save(response: ServerHttpResponse, @RequestBody form: RegisterVoterForm): ResponseEntity<Unit> {
-        val voterId = registerVoterUseCase.registerVoter(RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
+    @PostMapping("kotlin-reactive-flow/voters")
+    suspend fun save(response: ServerHttpResponse, @RequestBody form: RegisterVoterForm): ResponseEntity<Unit> {
+        val voterId = registerVoterUseCase.registerVoterReactive(
+                RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
 
         return ResponseEntity
-                .created(URI.create("/voters/$voterId"))
+                .created(URI.create("kotlin-reactive-flow/voters/$voterId"))
                 .build()
     }
 

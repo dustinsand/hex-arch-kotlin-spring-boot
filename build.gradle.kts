@@ -89,12 +89,17 @@ subprojects {
     // TODO move dependencies to where actually used in subproject
 
     dependencies {
+        val kotlinxCoroutinesVersion: String by project
+        
         implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
         implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$kotlinxCoroutinesVersion")
         implementation("org.valiktor:valiktor-spring-boot-starter:$valiktorVersion")
         implementation("org.valiktor:valiktor-javatime:$valiktorVersion")
+        implementation("com.h2database:h2:$h2Version")
+
         testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
             exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
         }
@@ -112,6 +117,6 @@ subprojects {
         testImplementation("org.assertj:assertj-core:$assertjVersion")
         testImplementation("org.reflections:reflections:$reflectionsVersion")
         testImplementation("org.valiktor:valiktor-test:$valiktorVersion")
-        implementation("com.h2database:h2:$h2Version")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutinesVersion")
     }
 }

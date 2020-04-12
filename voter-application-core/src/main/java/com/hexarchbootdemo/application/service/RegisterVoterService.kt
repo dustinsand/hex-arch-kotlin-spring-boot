@@ -11,4 +11,8 @@ class RegisterVoterService(val registerVoterRepository: RegisterVoterPort) : Reg
     override fun registerVoter(registerVoterCommand: RegisterVoterUseCase.RegisterVoterCommand): UUID {
         return registerVoterRepository.save(registerVoterCommand)
     }
+
+    override suspend fun registerVoterReactive(registerVoterCommand: RegisterVoterUseCase.RegisterVoterCommand): UUID {
+        return registerVoterRepository.saveReactive(registerVoterCommand)
+    }
 }

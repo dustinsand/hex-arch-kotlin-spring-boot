@@ -6,6 +6,7 @@ import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
 import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
+import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
@@ -37,6 +38,10 @@ internal class VoterRepository : FindVoterPort, RegisterVoterPort {
         return findAll().filter { it.lastName.contains(query.lastNameContains, true) }
     }
 
+    override suspend fun findVotersByLastNameReactive(query: FindVoterUseCase.FindByLastNameQuery): Flow<Voter> {
+        TODO("Not yet implemented")
+    }
+
     override fun save(command: RegisterVoterUseCase.RegisterVoterCommand): UUID {
         // Assume validation logic of command performed here
 
@@ -45,7 +50,7 @@ internal class VoterRepository : FindVoterPort, RegisterVoterPort {
         return id
     }
 
-    override fun saveReactive(command: RegisterVoterUseCase.RegisterVoterCommand): Mono<UUID> {
+    override suspend fun saveReactive(command: RegisterVoterUseCase.RegisterVoterCommand): UUID {
         TODO("Not yet implemented")
     }
 

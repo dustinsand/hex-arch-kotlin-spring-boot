@@ -14,6 +14,7 @@ dependencies {
     val quarkusPlatformGroupId: String by project
     val quarkusPlatformArtifactId: String by project
     val quarkusPlatformVersion: String by project
+    val kotlinxCoroutinesVersion: String by project
 
     implementation(project(":voter-application-core"))
     implementation(project(":voter-common"))
@@ -30,7 +31,7 @@ dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-resteasy")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$kotlinxCoroutinesVersion")
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")

@@ -12,6 +12,7 @@ import org.valiktor.validate
 interface RegisterVoterUseCase {
 
     fun registerVoter(registerVoterCommand: RegisterVoterCommand): UUID
+    suspend fun registerVoterReactive(registerVoterCommand: RegisterVoterCommand): UUID
 
     data class RegisterVoterCommand(val socialSecurityNumber: SocialSecurityNumber, val firstName: String, val lastName: String) {
         init {
