@@ -9,8 +9,10 @@ import org.springframework.web.reactive.function.server.coRouter
 class KotlinFlowRouterConfiguration {
     @FlowPreview
     @Bean
-    fun routes(findVoterHandler: FindVoterKotlinFlowHandler,
-               registerVoterKotlinFlowHandler: RegisterVoterKotlinFlowHandler) = coRouter {
+    fun routes(
+        findVoterHandler: FindVoterKotlinFlowHandler,
+        registerVoterKotlinFlowHandler: RegisterVoterKotlinFlowHandler
+    ) = coRouter {
         "/kotlin-reactive-flow/voters".nest {
             GET("/", findVoterHandler::findVoters)
             POST("/", registerVoterKotlinFlowHandler::save)

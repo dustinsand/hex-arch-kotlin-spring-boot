@@ -25,7 +25,7 @@ class RegisterVoterKotlinFlowHandler(private val registerVoterUseCase: RegisterV
 
         val voterId = registerVoterUseCase.registerVoterReactive(
                 RegisterVoterUseCase.RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
-        
+
         return created(URI.create("kotlin-reactive-flow/voters/$voterId")).buildAndAwait()
     }
 
