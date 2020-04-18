@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.adapter.input.rest
+package com.hexarchbootdemo.adapter.input.rest.kotlinflow
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
@@ -6,6 +6,7 @@ import io.restassured.filter.log.RequestLoggingFilter
 import io.restassured.filter.log.ResponseLoggingFilter
 import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.hasItems
 import org.hamcrest.CoreMatchers.startsWith
 import org.junit.jupiter.api.Test
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class VoterControllerIT(@LocalServerPort val port: Int) {
+class VoterControllerKotlinFlowIT(@LocalServerPort val port: Int) {
 
     val requestSpec: RequestSpecification = RequestSpecBuilder()
             .setBaseUri("http://localhost:$port")
@@ -25,11 +26,32 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
             .build()
 
     @Test
+    fun `Verify error for missing lastName parameter`() {
+        RestAssured.given()
+                .spec(requestSpec)
+                .`when`()
+                .get("kotlin-reactive-flow/voters")
+                .then()
+                .statusCode(400)
+    }
+
+    @Test
+    fun `Verify no results for missing lastName`() {
+        RestAssured.given()
+                .spec(requestSpec)
+                .`when`()
+                .get("kotlin-reactive-flow/voters?lastName=notfound")
+                .then()
+                .statusCode(200)
+                .body("$.size()", `is`(0))
+    }
+
+    @Test
     fun `Verify Voter last name in response`() {
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
-                .get("/voters?lastName=shimono")
+                .get("kotlin-reactive-flow/voters?lastName=shimono")
                 .then()
                 .statusCode(200)
                 .body("firstInitial", hasItems("D"),
@@ -46,22 +68,22 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
                 .given()
                 .contentType(ContentType.JSON)
                 .body("""
-                    { "firstName": "John", "lastName": "Doe", "socialSecurityNumber": "123-45-6789" }
+                    { "firstName": "Kotlin", "lastName": "Flow", "socialSecurityNumber": "999-99-9999" }
                     """)
                 .`when`()
-                .post("/voters")
+                .post("kotlin-reactive-flow/voters")
                 .then()
                 .statusCode(201)
-                .header("Location", startsWith("/voters/"))
+                .header("Location", startsWith("kotlin-reactive-flow/voters/"))
 
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
-                .get("/voters?lastName=doe")
+                .get("kotlin-reactive-flow/voters?lastName=flow")
                 .then()
                 .statusCode(200)
-                .body("firstInitial", hasItems("J"),
-                        "lastName", hasItems("Doe")
+                .body("firstInitial", hasItems("K"),
+                        "lastName", hasItems("Flow")
 
                 )
     }
@@ -76,7 +98,7 @@ class VoterControllerIT(@LocalServerPort val port: Int) {
                     { "firstName": "", "lastName": "" }
                     """)
                 .`when`()
-                .post("/voters")
+                .post("kotlin-reactive-flow/voters")
                 .then()
                 .statusCode(422)
     }

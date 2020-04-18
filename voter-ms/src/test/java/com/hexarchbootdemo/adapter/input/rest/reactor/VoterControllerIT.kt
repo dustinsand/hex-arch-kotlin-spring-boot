@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.adapter.input.rest
+package com.hexarchbootdemo.adapter.input.rest.reactor
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class VoterControllerKotlinFlowIT(@LocalServerPort val port: Int) {
+class VoterControllerIT(@LocalServerPort val port: Int) {
 
     val requestSpec: RequestSpecification = RequestSpecBuilder()
             .setBaseUri("http://localhost:$port")
@@ -29,7 +29,7 @@ class VoterControllerKotlinFlowIT(@LocalServerPort val port: Int) {
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
-                .get("kotlin-reactive-flow/voters?lastName=shimono")
+                .get("/voters?lastName=shimono")
                 .then()
                 .statusCode(200)
                 .body("firstInitial", hasItems("D"),
@@ -46,22 +46,22 @@ class VoterControllerKotlinFlowIT(@LocalServerPort val port: Int) {
                 .given()
                 .contentType(ContentType.JSON)
                 .body("""
-                    { "firstName": "Kotlin", "lastName": "Flow", "socialSecurityNumber": "999-99-9999" }
+                    { "firstName": "John", "lastName": "Doe", "socialSecurityNumber": "123-45-6789" }
                     """)
                 .`when`()
-                .post("kotlin-reactive-flow/voters")
+                .post("/voters")
                 .then()
                 .statusCode(201)
-                .header("Location", startsWith("kotlin-reactive-flow/voters/"))
+                .header("Location", startsWith("/voters/"))
 
         RestAssured.given()
                 .spec(requestSpec)
                 .`when`()
-                .get("kotlin-reactive-flow/voters?lastName=flow")
+                .get("/voters?lastName=doe")
                 .then()
                 .statusCode(200)
-                .body("firstInitial", hasItems("K"),
-                        "lastName", hasItems("Flow")
+                .body("firstInitial", hasItems("J"),
+                        "lastName", hasItems("Doe")
 
                 )
     }
@@ -76,7 +76,7 @@ class VoterControllerKotlinFlowIT(@LocalServerPort val port: Int) {
                     { "firstName": "", "lastName": "" }
                     """)
                 .`when`()
-                .post("kotlin-reactive-flow/voters")
+                .post("/voters")
                 .then()
                 .statusCode(422)
     }

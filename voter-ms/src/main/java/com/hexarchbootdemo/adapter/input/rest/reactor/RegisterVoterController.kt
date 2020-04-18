@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.adapter.input.rest
+package com.hexarchbootdemo.adapter.input.rest.reactor
 
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
@@ -19,17 +19,16 @@ import org.valiktor.validate
 import java.net.URI
 
 @RestController
-class RegisterVoterKotlinFlowController(
+class RegisterVoterController(
     private val registerVoterUseCase: RegisterVoterUseCase
 ) {
 
-    @PostMapping("kotlin-reactive-flow/voters")
-    suspend fun save(response: ServerHttpResponse, @RequestBody form: RegisterVoterForm): ResponseEntity<Unit> {
-        val voterId = registerVoterUseCase.registerVoterReactive(
-                RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
+    @PostMapping("/voters")
+    fun save(response: ServerHttpResponse, @RequestBody form: RegisterVoterForm): ResponseEntity<Unit> {
+        val voterId = registerVoterUseCase.registerVoter(RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
 
         return ResponseEntity
-                .created(URI.create("kotlin-reactive-flow/voters/$voterId"))
+                .created(URI.create("/voters/$voterId"))
                 .build()
     }
 

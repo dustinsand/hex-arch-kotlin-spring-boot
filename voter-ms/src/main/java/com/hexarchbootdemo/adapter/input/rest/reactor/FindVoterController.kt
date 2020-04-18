@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.adapter.input.rest
+package com.hexarchbootdemo.adapter.input.rest.reactor
 
 import com.hexarchbootdemo.adapter.input.rest.data.VoterJson
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
