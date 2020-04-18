@@ -7,7 +7,6 @@ import org.springframework.web.reactive.function.server.coRouter
 
 @Configuration
 class KotlinFlowRouterConfiguration {
-
     @FlowPreview
     @Bean
     fun routes(findVoterHandler: FindVoterKotlinFlowHandler,
