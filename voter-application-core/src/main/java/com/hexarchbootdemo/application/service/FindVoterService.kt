@@ -2,7 +2,7 @@ package com.hexarchbootdemo.application.service
 
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNameQuery
-import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
+import com.hexarchbootdemo.application.port.output.repository.FindVoterPort
 import com.hexarchbootdemo.domain.model.Voter
 import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Service

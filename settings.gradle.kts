@@ -21,4 +21,6 @@ include(
         "voter-lambda",
         "voter-application-core",
         "adapter-output:persistence:memory",
-        "adapter-output:persistence:h2")
+        "adapter-output:persistence:h2",
+        "adapter-output:rpc:eligibility"
+)

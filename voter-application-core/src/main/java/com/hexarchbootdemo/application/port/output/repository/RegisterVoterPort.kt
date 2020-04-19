@@ -1,4 +1,4 @@
-package com.hexarchbootdemo.application.port.output.persistence
+package com.hexarchbootdemo.application.port.output.repository
 
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
 import java.util.UUID

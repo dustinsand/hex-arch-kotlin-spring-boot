@@ -5,7 +5,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.hexarchbootdemo.adapter.input.lambda.data.FindVoterCommand
 import com.hexarchbootdemo.adapter.input.lambda.data.VoterJson
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNameQuery
-import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
+import com.hexarchbootdemo.application.port.output.repository.FindVoterPort
 import javax.inject.Inject
 import javax.inject.Named
 

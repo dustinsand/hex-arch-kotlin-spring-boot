@@ -2,13 +2,13 @@ package com.hexarchbootdemo.adapter.output.persistence.h2.internal
 
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
-import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
-import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
+import com.hexarchbootdemo.application.port.output.repository.FindVoterPort
+import com.hexarchbootdemo.application.port.output.repository.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
 import kotlinx.coroutines.flow.Flow
-import java.util.UUID
 import org.springframework.stereotype.Repository
+import java.util.UUID
 
 /**
  * An actual database was not used intentionally to minimize the complexity of this project so concepts of architecture were clearer.

@@ -3,8 +3,8 @@ package com.hexarchbootdemo.adapter.output.persistence.h2.internal
 import com.hexarchbootdemo.adapter.output.persistence.h2.generated_sources.jooq.tables.Voter.VOTER
 import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNameQuery
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase.RegisterVoterCommand
-import com.hexarchbootdemo.application.port.output.persistence.FindVoterPort
-import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
+import com.hexarchbootdemo.application.port.output.repository.FindVoterPort
+import com.hexarchbootdemo.application.port.output.repository.RegisterVoterPort
 import com.hexarchbootdemo.domain.model.SocialSecurityNumber
 import com.hexarchbootdemo.domain.model.Voter
 import kotlinx.coroutines.flow.Flow

@@ -1,9 +1,9 @@
 package com.hexarchbootdemo.application.service
 
 import com.hexarchbootdemo.application.port.input.RegisterVoterUseCase
-import com.hexarchbootdemo.application.port.output.persistence.RegisterVoterPort
-import java.util.UUID
+import com.hexarchbootdemo.application.port.output.repository.RegisterVoterPort
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class RegisterVoterService(val registerVoterRepository: RegisterVoterPort) : RegisterVoterUseCase {

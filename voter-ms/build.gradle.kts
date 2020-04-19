@@ -14,6 +14,7 @@ dependencies {
     implementation(project(":voter-application-core"))
     implementation(project(":voter-common"))
     implementation(project(":adapter-output:persistence:h2"))
+    implementation(project(":adapter-output:rpc:eligibility"))
     implementation("org.jooq:jooq")
 
     testImplementation("com.tngtech.archunit:archunit-junit5-api:$archunitVersion")
