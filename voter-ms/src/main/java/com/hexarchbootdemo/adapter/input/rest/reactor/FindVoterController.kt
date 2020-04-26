@@ -20,6 +20,10 @@ class FindVoterController(
     }
 
     private fun toJsonList(people: List<Voter>): List<VoterJson> {
-        return people.map { VoterJson(firstInitial = it.firstName[0], lastName = it.lastName, socialSecurityNumber = it.socialSecurityNumber.toString()) }
+        return people.map {
+            VoterJson(firstInitial = it.firstName[0],
+                lastName = it.lastName,
+                socialSecurityNumber = it.socialSecurityNumber.toString())
+        }
     }
 }

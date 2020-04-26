@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service
  */
 @Service
 class QuorumService {
+    companion object {
+        const val QUORUM_MIN_PERCENT = .8
+    }
 
     fun haveQuorum(voters: List<Voter>, membershipSize: Int): Boolean {
         val percent: Float = (voters.size / membershipSize.toFloat())
-        return percent >= .8
+        return percent >= QUORUM_MIN_PERCENT
     }
 }

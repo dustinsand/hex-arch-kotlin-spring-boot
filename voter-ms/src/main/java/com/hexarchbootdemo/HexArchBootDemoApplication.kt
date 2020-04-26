@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Configuration
 private class HexArchBootDemoApplication
 
 fun main(args: Array<String>) {
+    @Suppress("SpreadOperator")
     runApplication<HexArchBootDemoApplication>(*args)
 }
 
 @Configuration
 @ComponentScan
+@Suppress("UnusedPrivateClass")
 private class MainConfig

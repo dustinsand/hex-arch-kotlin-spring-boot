@@ -1,4 +1,3 @@
-
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -22,6 +21,7 @@ plugins {
     java
     id("org.springframework.boot") version "2.2.4.RELEASE" apply false
     id("com.github.ben-manes.versions") version "0.27.0"
+    id("io.gitlab.arturbosch.detekt").version("1.8.0")
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.spring") version kotlinVersion apply false
 }
@@ -43,7 +43,9 @@ allprojects {
         testLogging {
             showExceptions = true
             showStandardStreams = true
-            events(org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED, org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED, org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+            events(org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+                    org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
+                    org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
         }
     }
 
@@ -79,6 +81,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jmailen.kotlinter")
+    apply(plugin = "io.gitlab.arturbosch.detekt")
 
     repositories {
         jcenter()
@@ -90,7 +93,8 @@ subprojects {
 
     dependencies {
         val kotlinxCoroutinesVersion: String by project
-        
+
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.8.0")
         implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
         implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlin")
@@ -118,5 +122,29 @@ subprojects {
         testImplementation("org.reflections:reflections:$reflectionsVersion")
         testImplementation("org.valiktor:valiktor-test:$valiktorVersion")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutinesVersion")
+    }
+
+    detekt {
+        toolVersion = "1.8.0"
+        input = files("src/main/java", "src/main/kotlin")
+        parallel = true
+        reports {
+            xml {
+                enabled = true
+                destination = file("build/reports/detekt.xml")
+            }
+            html {
+                enabled = true
+                destination = file("build/reports/detekt.html")
+            }
+            txt {
+                enabled = true
+                destination = file("build/reports/detekt.txt")
+            }
+            custom {
+                reportId = "CustomJsonReport"
+                destination = file("build/reports/detekt.json")
+            }
+        }
     }
 }

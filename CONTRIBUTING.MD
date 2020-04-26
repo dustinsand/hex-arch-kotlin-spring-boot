@@ -18,9 +18,11 @@ lintKotlin: report Kotlin lint errors and by default fail the build.
 Create pre-commit hook, .git/hooks/pre-commit
 ```
 #!/bin/sh
-<path to project>/gradlew formatKotlin
+./gradlew formatKotlin
 if [ $? -ne 0 ]; then exit 1; fi
-<path to project>/gradlew lintKotlin
+./gradlew lintKotlin
+if [ $? -ne 0 ]; then exit 1; fi
+./gradlew detekt
 if [ $? -ne 0 ]; then exit 1; fi
 ```
 chmod +x .git/hooks/pre-commit 

@@ -5,7 +5,7 @@ import com.hexarchbootdemo.domain.LAST_NAME_MIN_LENGTH
 import org.valiktor.functions.hasSize
 import org.valiktor.validate
 
-internal data class FindVoterCommand(val lastName: String) {
+data class FindVoterCommand(val lastName: String) {
     // Why is the JacksonObjectMapperCustomer not used forcing me to create this empty constructor??
     constructor() : this("not provided")
 

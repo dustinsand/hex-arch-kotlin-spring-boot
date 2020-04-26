@@ -25,7 +25,8 @@ class RegisterVoterController(
 
     @PostMapping("/voters")
     fun save(response: ServerHttpResponse, @RequestBody form: RegisterVoterForm): ResponseEntity<Unit> {
-        val voterId = registerVoterUseCase.registerVoter(RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
+        val voterId = registerVoterUseCase.registerVoter(
+            RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
 
         return ResponseEntity
                 .created(URI.create("/voters/$voterId"))

@@ -9,8 +9,9 @@ import com.hexarchbootdemo.application.port.output.repository.FindVoterPort
 import javax.inject.Inject
 import javax.inject.Named
 
+@Suppress
 @Named("findVoter")
-private class FindVoterLambda : RequestHandler<FindVoterCommand, List<VoterJson>> {
+class FindVoterLambda : RequestHandler<FindVoterCommand, List<VoterJson>> {
     @Inject
     lateinit var findVoterPort: FindVoterPort
 

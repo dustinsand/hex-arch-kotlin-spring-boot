@@ -11,10 +11,11 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 /**
- * An actual database was not used intentionally to minimize the complexity of this project so concepts of architecture were clearer.
- * This repository is simply to demonstrate component responsibilities in this architecture.
+ * An actual database was not used intentionally to minimize the complexity of this project so concepts of architecture
+ * were clearer. This repository is simply to demonstrate component responsibilities in this architecture.
  *
- * Notice the use of the Kotlin keyword 'internal' so this class is only visible in this module. See https://kotlinlang.org/docs/reference/visibility-modifiers.html#modules for a detailed explanation.
+ * Notice the use of the Kotlin keyword 'internal' so this class is only visible in this module.
+ * See https://kotlinlang.org/docs/reference/visibility-modifiers.html#modules for a detailed explanation.
  *
  */
 @Repository("VoterPersistenceMemoryAdapter")
@@ -25,9 +26,12 @@ internal class VoterRepository : FindVoterPort, RegisterVoterPort {
 
     init {
         // Init voter map
-        val voter1 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("111-11-1111"), firstName = "Dustin", lastName = "Shimono")
-        val voter2 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("222-22-2222"), firstName = "Sandy", lastName = "Shimono")
-        val voter3 = Voter(id = UUID.randomUUID(), socialSecurityNumber = SocialSecurityNumber("333-33-3333"), firstName = "Tim", lastName = "Coocha")
+        val voter1 = Voter(id = UUID.randomUUID(),
+            socialSecurityNumber = SocialSecurityNumber("111-11-1111"), firstName = "Dustin", lastName = "Shimono")
+        val voter2 = Voter(id = UUID.randomUUID(),
+            socialSecurityNumber = SocialSecurityNumber("222-22-2222"), firstName = "Sandy", lastName = "Shimono")
+        val voter3 = Voter(id = UUID.randomUUID(),
+            socialSecurityNumber = SocialSecurityNumber("333-33-3333"), firstName = "Tim", lastName = "Coocha")
         databaseMap[voter1.id] = voter1
         databaseMap[voter2.id] = voter2
         databaseMap[voter3.id] = voter3
