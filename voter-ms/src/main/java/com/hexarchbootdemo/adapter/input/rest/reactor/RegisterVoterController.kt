@@ -29,8 +29,8 @@ class RegisterVoterController(
             RegisterVoterCommand(SocialSecurityNumber(form.socialSecurityNumber), form.firstName, form.lastName))
 
         return ResponseEntity
-                .created(URI.create("/voters/$voterId"))
-                .build()
+            .created(URI.create("/voters/$voterId"))
+            .build()
     }
 
     data class RegisterVoterForm(val socialSecurityNumber: String, val firstName: String, val lastName: String) {
