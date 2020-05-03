@@ -2,8 +2,8 @@ description = "voter-application-core"
 
 plugins {
     kotlin("jvm")
-    kotlin("plugin.spring")
 }
 
 dependencies {
+    implementation("javax.inject:javax.inject:1")
 }

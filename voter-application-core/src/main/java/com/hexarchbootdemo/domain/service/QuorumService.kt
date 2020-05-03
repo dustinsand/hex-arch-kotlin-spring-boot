@@ -1,12 +1,12 @@
 package com.hexarchbootdemo.domain.service
 
 import com.hexarchbootdemo.domain.model.Voter
-import org.springframework.stereotype.Service
+import javax.inject.Named
 
 /**
  * Example of a domain service because business logic for a set of voters does not belong in the application layer.
  */
-@Service
+@Named
 class QuorumService {
     companion object {
         const val QUORUM_MIN_PERCENT = .8

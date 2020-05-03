@@ -5,9 +5,9 @@ import com.hexarchbootdemo.application.port.input.FindVoterUseCase.FindByLastNam
 import com.hexarchbootdemo.application.port.output.repository.FindVoterPort
 import com.hexarchbootdemo.domain.model.Voter
 import kotlinx.coroutines.flow.Flow
-import org.springframework.stereotype.Service
+import javax.inject.Named
 
-@Service
+@Named
 class FindVoterService(val findVoterRepository: FindVoterPort) : FindVoterUseCase {
     override fun findByLastName(query: FindByLastNameQuery): List<Voter> {
         return findVoterRepository.findVotersByLastName(query)
