@@ -30,12 +30,34 @@ This project is used to show how the hexagonal architecture can be applied to a 
 * Architecture is enforceable using tests so it remains clean over time as old and new developers work on the code base.
 * [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882). You will see influences from Clean code in the design. 
 
-# How it works
-The hexagon is divided into an inside and outside. The inside contains use cases (application services) and domain logic while the outside contains technical details like databases, messaging, caching.  The two parts are connected using "ports", exposed by the inside, and "adapters", implemented by the outside.
+# Concepts
 
-Input and output "adapters" are at the outermost layer of the hexagon, the edge of the application.  The domain layer of the hexagon, the core, is insulated from the technical concerns at the edge of the application.  The inputs and outputs at the edge allow the design to be switched with other technologies without impacting the core of the application. 
+The hexagonal architecture conceptually consists of two parts: the Application Core, and the Ports and Adapters.
 
-Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This form of dependency inversion protects the integrity of the domain and application layers. Outside of the application layer, we have ports (Interfaces) and adapters (Implementations) that handle the technical delivery to the outside world.  The adapters handle the technical delivery by using the application services in the domain layer. 
+Outer layers depend on inner layers. Inner layers expose interfaces that outer layers must adapt to and implement. This
+form of dependency inversion protects the integrity of the domain and application layers. Outside the application layer,
+we have ports (Interfaces) and adapters (Implementations) that handle the technical delivery to the outside world. The
+adapters handle the technical delivery by using the application services in the domain layer.
+
+## Application Core
+
+The inside of the hexagon contains the business logic and is unaware of the technologies used to implement the
+application. The business logic does not care if the application provides a REST API or a GraphQL API or whether the
+data is stored in a database or a file. The application core declares the ports that are needed to fulfill the use
+cases. The technical details of how the adapters implement the ports are not a concern of the application core.
+
+## Ports and Adapters
+
+The ports (Interfaces) are at the inside edge of the hexagon, and they declare the requirements of the application
+to fulfill the use cases. Input ports allow different types of drivers to interface with the application core. Output
+ports allow different kinds of technologies to be driven by the application core.
+
+The ports at the edge allow the design to be switched with other technologies without impacting the core of the
+application. For example, the application could be driven by a REST API or a GraphQL API using the same input ports
+while the application could drive storing the data in a relational database, or a file using the same output ports.
+
+Adapters are at the outside edge of the hexagon, and are the implementation of the port using the technology of choice.
+For example, a REST API input adapter, or a PostgreSQL output adapter. 
 
 ![voter_hex_diagram](https://user-images.githubusercontent.com/5289/74338280-de080e80-4d6f-11ea-9ddd-4c0edc5fd223.png)
 ![lambda diagram](https://user-images.githubusercontent.com/5289/74338279-de080e80-4d6f-11ea-9924-0968a11976e6.png)
