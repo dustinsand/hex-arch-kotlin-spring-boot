@@ -7,13 +7,11 @@
 >As events arrive from the outside world at a port, a technology-specific adapter converts it into a usable procedure call or message and passes it to the application. The application is blissfully ignorant of the nature of the input device. When the application has something to send out, it sends it out through a port to an adapter, which creates the appropriate signals needed by the receiving technology (human or automated). The application has a semantically sound interaction with the adapters on all sides of it, without actually knowing the nature of the things on the other side of the adapters.”  
 >– [Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
 
-Personally I've used hexagonal architectures with DDD for years because it aligns well with how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM microservices so this is my interpretation.  If a canonical project structure exists, please let me know.  I've seen a different interpretation of project structures from each engineer I've learned this architecture from.
-
-Thank you to all the engineers who have shared their knowledge on this topic.  If you are unfamiliar with this architecture, please review the references first.  This project is my interpretation of how to design and implement a hexagonal architecture for the JVM.
+Personally I've used hexagonal architectures with DDD for years because it aligns well with how I reason about designing applications.  However, I'm not aware of a "standard" project structure for JVM microservices so this is my interpretation of how to design and implement a hexagonal architecture for the JVM.
 
 # Project Description
 
-This project is used to show how the hexagonal architecture can be applied to a Microservice (Spring Boot) and a native AWS Lambda (Quarkus) in a multi module project.  The multi module project allows for code re-use (each application re-uses the application core and the output adapters) across modules. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture and apply the concepts.  
+This project is used to show how the hexagonal architecture can be applied to a Microservice (Spring Boot) and a native binary AWS Lambda (Quarkus) in a multi module project.  The multi module project allows for code re-use (each application re-uses the application core and the output adapters) across modules. The sample code is intentionally simple in order to focus on how to structure the packages for a hexagonal architecture and apply the concepts.  
 
 # Objective Of This Architecture
 
@@ -164,29 +162,3 @@ The architecture is at risk of eroding over time if boundaries between layers ar
 Kotlin added the keyword modifier, internal, to enforce component boundaries and overcome the weakness of package-private in Java. I liked the idea in the reference, Clean Boundaries, to be explicit and put "internal" classes in a package named internal which could then be enforced by ArchUnit. However, Kotlin doesn't support Package annotations so you will see the InternalPackage annotation is written in Java and the package-info.java in the "internal" packages are also in Java. I'm experimenting if this is a good idea or not with Kotlin because it does seem redundant since Kotlin has the internal modifier. However, I like that I can test for any class in an "internal" package is not used inappropriately (developers can still forget to use the internal modifier) and it guides the developer to use the dependency inversion principle. 
 
 ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework. See src/test/java/.../HexagonalArchitectureTest.kt and InternalPackageTest.kt for the rules checked.  
-
-# TL;DR Show me a diagram
-
-The references have great example diagrams to visually explain how the components fit together so no point reinventing the wheel here.  [Herberto Graca](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/) has a diagram which is one of my favorites showing all the components together.
-
-![herbertograca_hex_diagram](https://user-images.githubusercontent.com/5289/50517936-e70d2200-0a80-11e9-9382-d124912c27f3.png)
-
-# References
-* [Hexagonal Architecture - Alistair Cockburn](http://wiki.c2.com/?HexagonalArchitecture)
-* [Domain Language - DDD](http://domainlanguage.com/ddd/)
-* [Patterns, Principles, and Practices of Domain-Driven Design](http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html)
-* [Using Kotlin to implement Clean Architecture by Lieven Doclo](https://www.youtube.com/watch?v=0wAvVcrbVK4&t=1513s) 
-* [Code from Devoxx Belgium 2017 presentation](https://github.com/lievendoclo/devoxx-2017)
-* [DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/)
-* [Hexagonal Architecture - Chris Fidao](http://fideloper.com/hexagonal-architecture)
-* [The Clean Architecture - Uncle Bob](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
-* [Hexagonal Architecture Is Powerful](https://dzone.com/articles/hexagonal-architecture-is-powerful)
-* [What is Hexagonal Architecture?](https://www.culttt.com/2014/12/31/hexagonal-architecture/)
-* [Decoupling from ASP.NET - Hexagonal Architectures in .NET](https://skillsmatter.com/skillscasts/5744-decoupling-from-asp-net-hexagonal-architectures-in-net)
-* [Hexagonal Architecture 101: Decoupling your technical code from your business logic (HexArch)](https://beyondxscratch.com/2017/08/19/decoupling-your-technical-code-from-your-business-logic-with-the-hexagonal-architecture-hexarch/)
-* [https://jmgarridopaz.github.io/content/hexagonalarchitecture.html](https://jmgarridopaz.github.io/content/hexagonalarchitecture.html)
-* [Clean Architecture with Spring by Tom Hombergs @ Spring I/O 2019](https://www.youtube.com/watch?v=cPH5AiqLQTo)
-* [Get Your Hands Dirty on Clean Architecture](https://leanpub.com/get-your-hands-dirty-on-clean-architecture)
-* [DevTernity 2019: Ian Cooper – The Clean Architecture](https://www.youtube.com/watch?v=SxJPQ5qXisw)
-* [Goto 2018 - Modular Monoliths - Simon Brown](https://www.youtube.com/watch?v=5OjqD-ow8GE)
-* [Clean Boundaries - Tom Hombergs](https://reflectoring.io/java-components-clean-boundaries/)
